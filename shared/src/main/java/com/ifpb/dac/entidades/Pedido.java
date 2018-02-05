@@ -1,7 +1,7 @@
 
 package com.ifpb.dac.entidades;
 
-import com.ifpb.dac.enums.Tipo;
+import com.ifpb.dac.enums.TipoUsuario;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,13 +33,13 @@ public class Pedido implements Serializable {
     @Column(nullable = false, length = 20)
     private String senha;
     @Enumerated(EnumType.STRING)
-    private Tipo tipo;
+    private TipoUsuario tipo;
     private int prioridade;
 
     public Pedido() {
     }
 
-    public Pedido(String nome, String email, String senha, Tipo tipo, int prioridade) {
+    public Pedido(String nome, String email, String senha, TipoUsuario tipo, int prioridade) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -79,11 +79,11 @@ public class Pedido implements Serializable {
         this.senha = senha;
     }
 
-    public Tipo getTipo() {
+    public TipoUsuario getTipoUsuario() {
         return tipo;
     }
 
-    public void setTipo(Tipo tipo) {
+    public void setTipoUsuario(TipoUsuario tipo) {
         this.tipo = tipo;
     }
 
