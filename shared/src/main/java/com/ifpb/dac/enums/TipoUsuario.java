@@ -9,7 +9,7 @@ package com.ifpb.dac.enums;
  *
  * @author rodrigobento
  */
-public enum Tipo {
+public enum TipoUsuario {
     
     Administrador, Professor, Publico, Aluno;
     
