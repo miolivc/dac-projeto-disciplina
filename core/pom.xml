@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+            http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>ProjetoDAC</artifactId>
-        <groupId>com.mycompany</groupId>
+        <artifactId>projeto-dac</artifactId>
+        <groupId>br.edu.ifpb.dac</groupId>
         <version>1</version>
     </parent>
 
-    <groupId>com.mycompany</groupId>
+    <groupId>br.edu.ifpb.dac</groupId>
     <artifactId>core</artifactId>
     <version>1</version>
     <packaging>war</packaging>
@@ -24,6 +27,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>shared</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>br.edu.ifpb.dac</groupId>
+            <artifactId>shared</artifactId>
+            <version>1</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>

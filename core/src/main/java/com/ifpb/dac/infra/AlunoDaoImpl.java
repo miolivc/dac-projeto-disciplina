@@ -69,11 +69,7 @@ public class AlunoDaoImpl implements AlunoDao {
                 + "Aluno a WHERE a.email =:email", Aluno.class);
         createQuery.setParameter("email", email);
         Optional<Aluno> findFirst = createQuery.getResultList().stream().findFirst();
-        if (findFirst.isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+        return findFirst.isPresent();
     }
     
 }

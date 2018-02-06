@@ -4,7 +4,7 @@ import com.ifpb.dac.entidades.Aluno;
 import com.ifpb.dac.entidades.Curso;
 import com.ifpb.dac.entidades.Pedido;
 import com.ifpb.dac.entidades.Usuario;
-import com.ifpb.dac.enums.Tipo;
+import com.ifpb.dac.enums.TipoUsuario;
 import com.ifpb.dac.interfaces.AlunoDao;
 import com.ifpb.dac.interfaces.CursoDao;
 import com.ifpb.dac.interfaces.PedidoDao;
@@ -93,7 +93,7 @@ public class ControladorCadastro implements Serializable {
                 mostrarMensagem("Esse email ja esta cadastado na base de dados");
             } else {
                 Aluno aln = new Aluno(nome, email, senha, curso, false);
-                Pedido p = new Pedido(nome, email, senha, Tipo.Aluno, 1);
+                Pedido p = new Pedido(nome, email, senha, TipoUsuario.Aluno, 1);
                 pedidoDao.adicionar(p);
                 alunoDao.adicionar(aln);
                 redirecionar();
@@ -111,8 +111,8 @@ public class ControladorCadastro implements Serializable {
         if (verificarEmail) {
             mostrarMensagem("Esse email ja esta cadastado na base de dados");
         } else {
-            Usuario usuario = new Usuario(nome, email, senha, Tipo.Professor, false);
-            Pedido p = new Pedido(nome, email, senha, Tipo.Professor, 1);
+            Usuario usuario = new Usuario(nome, email, senha, TipoUsuario.Professor, false);
+            Pedido p = new Pedido(nome, email, senha, TipoUsuario.Professor, 1);
             pedidoDao.adicionar(p);
             usuarioDao.adicionar(usuario);
             limparCampos();

@@ -55,7 +55,7 @@ public class CursoDaoImpl implements CursoDao {
                 + "WHERE c.info.descricao =:curso", Curso.class);
         createQuery.setParameter("curso", curso);
         Optional<Curso> findFirst = createQuery.getResultList().stream().findFirst();
-        if(findFirst.isPresent()){
+        if (findFirst.isPresent()){
             return findFirst.get();
         } else {
             return null;

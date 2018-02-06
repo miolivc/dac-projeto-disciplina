@@ -4,7 +4,7 @@ import com.ifpb.dac.entidades.Aluno;
 import com.ifpb.dac.entidades.Pedido;
 import com.ifpb.dac.entidades.Professor;
 import com.ifpb.dac.entidades.Usuario;
-import com.ifpb.dac.enums.Tipo;
+import com.ifpb.dac.enums.TipoUsuario;
 import com.ifpb.dac.interfaces.AlunoDao;
 import com.ifpb.dac.interfaces.PedidoDao;
 import com.ifpb.dac.interfaces.ProfessorDao;
@@ -57,7 +57,7 @@ public class ControladorAdmin implements Serializable {
 
     public String realizarLogin() {
         Usuario admin = usuarioDao.autentica(usuario.getEmail(),
-                usuario.getSenha(), Tipo.Administrador);
+                usuario.getSenha(), TipoUsuario.Administrador);
         if (admin != null) {
             return "menu.xhtml";
         } else {
@@ -67,7 +67,7 @@ public class ControladorAdmin implements Serializable {
     }
 
     public String liberarAcesso(Pedido p) {
-        if (p.getTipo().equals(Tipo.Aluno)) {
+        if (p.getTipoUsuario().equals(TipoUsuario.Aluno)) {
             Aluno alunoLib = alunoDao.autentica(p.getEmail(), p.getSenha());
             if (alunoLib != null) {
                 alunoLib.setLogado(true);

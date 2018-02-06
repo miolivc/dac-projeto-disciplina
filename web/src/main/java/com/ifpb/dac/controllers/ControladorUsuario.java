@@ -4,7 +4,7 @@ import com.ifpb.dac.entidades.Aluno;
 import com.ifpb.dac.entidades.Pedido;
 import com.ifpb.dac.entidades.Professor;
 import com.ifpb.dac.entidades.Usuario;
-import com.ifpb.dac.enums.Tipo;
+import com.ifpb.dac.enums.TipoUsuario;
 import com.ifpb.dac.interfaces.AlunoDao;
 import com.ifpb.dac.interfaces.PedidoDao;
 import com.ifpb.dac.interfaces.ProfessorDao;
@@ -79,9 +79,9 @@ public class ControladorUsuario implements Serializable {
     }
 
     public String realizarLogin() {
-        Tipo tipo = Enum.valueOf(Tipo.class, valorSelect);
+        TipoUsuario tipo = Enum.valueOf(TipoUsuario.class, valorSelect);
         // Caso seja login de professor
-        if (tipo.equals(Tipo.Professor)) {
+        if (tipo.equals(TipoUsuario.Professor)) {
             Professor autentica = professorDao.autentica(usuario.getEmail(), usuario.getSenha());
             usuario = new Usuario();
             if (autentica != null) {
