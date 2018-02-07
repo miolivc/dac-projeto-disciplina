@@ -32,18 +32,24 @@ public class Turma implements Serializable {
     @GeneratedValue(generator = "minha_seq_turma", strategy = GenerationType.SEQUENCE)
     @Column(name = "codigo_turma")
     private int codigo_turma;
+    
     @Column(name = "identificacao", nullable = false, length = 1)
     private String identificacao;
+    
     @Column(name = "disciplina", nullable = false, length = 50)
     private String nome_disciplina;
+    
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "codigo_curso")
     private Curso curso;
+    
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "codigo_prof")
     private Professor professor;
+    
     @OneToMany(mappedBy = "turma", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Aula> aulas;
+    
     @OneToMany(mappedBy = "turma", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Material> material;
     
@@ -53,9 +59,12 @@ public class Turma implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "id"))
     private List<Aluno> alunos;
     
-
+    {
+        this.aulas = new ArrayList<>();
+        this.alunos = new ArrayList<>();
+    }
+    
     public Turma(String identificacao, String nome_disciplina, Curso curso, Professor professor) {
-        this();
         this.identificacao = identificacao;
         this.nome_disciplina = nome_disciplina;
         this.curso = curso;
@@ -63,8 +72,6 @@ public class Turma implements Serializable {
     }
 
     public Turma() {
-        this.aulas = new ArrayList<>();
-        this.alunos = new ArrayList<>();
     }
 
     public List<Aluno> getAlunos() {

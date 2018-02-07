@@ -1,12 +1,14 @@
 package com.ifpb.dac.entidades;
 
+import com.ifpb.dac.enums.TipoLocal;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,30 +21,33 @@ import javax.persistence.SequenceGenerator;
         sequenceName = "seq_sala",
         initialValue = 38,
         allocationSize = 1)
-public class Sala implements Serializable {
+
+public class LocalAula implements Serializable {
     
     @Id
-    @GeneratedValue(generator = "minha_seq_sala", strategy = GenerationType.SEQUENCE)
-    @Column(name = "codigo_sala")
+    @GeneratedValue(generator = "minha_seq_local", strategy = GenerationType.SEQUENCE)
+    @Column(name = "codigo_local")
     private int codigo_sala;        
-//    @Embedded
-//    private Info info;
     @Column(name = "abreviacao", length = 30)
     private String abreviacao;
     @Column(name = "descricao", length = 50)
     private String descricao;
     @OneToMany(mappedBy = "sala", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Aula> aulas;
-
-    public Sala(String desc, String abrev) {
-        this();
-        this.abreviacao = abrev;
-        this.descricao = desc;
-//        this.info = informacoes;
+    @Enumerated(EnumType.STRING)
+    private TipoLocal tipoLocal;
+    
+    {
+        this.aulas = new ArrayList<>();
     }
 
-    public Sala() {
-        aulas = new ArrayList<>();
+    public LocalAula(String desc, String abrev, TipoLocal tipoLocal) {
+        this.abreviacao = abrev;
+        this.descricao = desc;
+        this.tipoLocal = tipoLocal;
+    }
+
+    public LocalAula() {
     }
 
     public int getCodigo_sala() {
@@ -52,14 +57,6 @@ public class Sala implements Serializable {
     public void setCodigo_sala(int codigo_sala) {
         this.codigo_sala = codigo_sala;
     }
-
-//    public Info getInfo() {
-//        return info;
-//    }
-//
-//    public void setInfo(Info info) {
-//        this.info = info;
-//    }
 
     public String getAbreviacao() {
         return abreviacao;
@@ -84,5 +81,13 @@ public class Sala implements Serializable {
     public void setAulas(List<Aula> aulas) {
         this.aulas = aulas;
     }
-         
+
+    public TipoLocal getTipoLocal() {
+        return tipoLocal;
+    }
+
+    public void setTipoLocal(TipoLocal tipoLocal) {
+        this.tipoLocal = tipoLocal;
+    }
+    
 }

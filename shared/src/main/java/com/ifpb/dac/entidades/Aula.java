@@ -41,23 +41,20 @@ public class Aula implements Serializable {
     @JoinColumn(name = "codigo_prof")
     private Professor professor;
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "codigo_sala")
-    private Sala sala;
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "codigo_lab")
-    private Laboratorio laboratorio;
+    @JoinColumn(name = "codigo_local")
+    private LocalAula local;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "codigo_turma")
     private Turma turma;
 
-    public Aula(String dia, Curso curso, Disciplina disciplina, Horario horario, Professor professor, Sala sala, Laboratorio laboratorio, Turma turma) {
+    public Aula(String dia, Curso curso, Disciplina disciplina, Horario horario, 
+            Professor professor, LocalAula local, Turma turma) {
         this.dia = dia;
         this.curso = curso;
         this.disciplina = disciplina;
         this.horario = horario;
         this.professor = professor;
-        this.sala = sala;
-        this.laboratorio = laboratorio;
+        this.local = local;
         this.turma = turma;
     }
 
@@ -120,20 +117,12 @@ public class Aula implements Serializable {
         this.professor = professor;
     }
 
-    public Sala getSala() {
-        return sala;
+    public LocalAula getLocal() {
+        return local;
     }
 
-    public void setSala(Sala sala) {
-        this.sala = sala;
-    }
-
-    public Laboratorio getLaboratorio() {
-        return laboratorio;
-    }
-
-    public void setLaboratorio(Laboratorio laboratorio) {
-        this.laboratorio = laboratorio;
+    public void setLocal(LocalAula local) {
+        this.local = local;
     }
 
     public Turma getTurma() {

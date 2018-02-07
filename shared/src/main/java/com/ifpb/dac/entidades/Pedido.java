@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -24,26 +25,18 @@ import javax.persistence.SequenceGenerator;
 public class Pedido implements Serializable {
     
     @Id
-    @GeneratedValue(generator = "minha_seq_pedido", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "minha_seq_pedido", 
+            strategy = GenerationType.SEQUENCE)
     private int id;
-    @Column(nullable = false, length = 50)
-    private String nome;
-    @Column(nullable = false, length = 50)
-    private String email;
-    @Column(nullable = false, length = 20)
-    private String senha;
-    @Enumerated(EnumType.STRING)
-    private TipoUsuario tipo;
+    @ManyToOne
+    private Usuario usuario;
     private int prioridade;
 
     public Pedido() {
     }
 
-    public Pedido(String nome, String email, String senha, TipoUsuario tipo, int prioridade) {
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.tipo = tipo;
+    public Pedido(Usuario usuario, int prioridade) {
+        this.usuario = usuario;
         this.prioridade = prioridade;
     }
 
@@ -55,36 +48,12 @@ public class Pedido implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public TipoUsuario getTipoUsuario() {
-        return tipo;
-    }
-
-    public void setTipoUsuario(TipoUsuario tipo) {
-        this.tipo = tipo;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public int getPrioridade() {

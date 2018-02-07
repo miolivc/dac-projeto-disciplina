@@ -32,17 +32,16 @@ public class Curso implements Serializable {
     @Column(name = "unidade", nullable = false, length = 50)
     private String unidade;
     @OneToMany(mappedBy = "curso", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Aula> aulas;
-    @OneToMany(mappedBy = "curso", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Turma> turmas;
     
+    {
+        this.turmas = new ArrayList<>();
+    }
+    
     public Curso() {
-        turmas = new ArrayList<>();
-        aulas = new ArrayList<>();
     }
 
     public Curso(Info info, int periodo, String unidade) {
-        this();
         this.info = info;
         this.periodo = periodo;
         this.unidade = unidade;
@@ -80,14 +79,6 @@ public class Curso implements Serializable {
         this.unidade = unidade;
     }
 
-    public List<Aula> getAulas() {
-        return aulas;
-    }
-
-    public void setAulas(List<Aula> aulas) {
-        this.aulas = aulas;
-    }
-
     public List<Turma> getTurmas() {
         return turmas;
     }
@@ -96,4 +87,4 @@ public class Curso implements Serializable {
         this.turmas = turmas;
     }
 
-    }
+}
