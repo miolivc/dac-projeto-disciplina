@@ -66,13 +66,15 @@ public class ControladorAdmin implements Serializable {
         }
     }
 
-    public String liberarAcesso(Pedido p) {
+    public String liberarAcesso(Pedido pedido) {
+        Usuario p = pedido.getUsuario();
+
         if (p.getTipoUsuario().equals(TipoUsuario.Aluno)) {
             Aluno alunoLib = alunoDao.autentica(p.getEmail(), p.getSenha());
             if (alunoLib != null) {
                 alunoLib.setLogado(true);
                 alunoDao.atualizar(alunoLib);
-                pedidoDao.remover(p);
+                pedidoDao.remover(pedido);
             }
         } else {
             Professor prof = professorDao.autentica(p.getEmail(), p.getSenha());
@@ -81,7 +83,7 @@ public class ControladorAdmin implements Serializable {
             if (prof != null) {
                 prof.setLogado(true);
                 professorDao.atualizar(prof);
-                pedidoDao.remover(p);
+                pedidoDao.remover(pedido);
             }
         }        
         return null;
