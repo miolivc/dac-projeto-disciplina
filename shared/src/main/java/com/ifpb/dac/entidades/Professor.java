@@ -23,35 +23,43 @@ public class Professor implements Serializable {
     @GeneratedValue
     @Column(name = "codigo_prof")
     private int codigo;
+
     @Column(name = "email", length = 50, nullable = false)
     private String email;
+
     @Column(name = "nome", length = 50, nullable = false)
     private String nome;
+
     @Column(name = "senha", length = 50, nullable = false)
     private String senha;
+
     @Column(name = "regime")
     @Enumerated(EnumType.STRING)
     private Regime regime;
+
     @Column(name = "unidade")
     @Enumerated(EnumType.STRING)
     private Unidade unidade;
+
     @Column(name = "vinculo")
     @Enumerated(EnumType.STRING)
     private Vinculo vinculo;
+
     private boolean logado;
+
     @OneToMany(mappedBy = "professor", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Aula> aulas;
+
     @OneToMany(mappedBy = "professor", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Turma> turmas;
 
-    public Professor() {
-        turmas = new ArrayList<>();
-        aulas = new ArrayList<>();
+    {
+        this.turmas = new ArrayList<>();
+        this.aulas = new ArrayList<>();
     }
 
     public Professor(String email, String nome, String senha, Regime regime, 
             Unidade unidade, Vinculo vinculo, boolean log) {
-        this();
         this.email = email;
         this.nome = nome;
         this.senha = senha;
@@ -59,6 +67,9 @@ public class Professor implements Serializable {
         this.unidade = unidade;
         this.vinculo = vinculo;
         this.logado = log;
+    }
+
+    public Professor() {
     }
 
     public int getCodigo() {

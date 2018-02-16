@@ -27,6 +27,7 @@ public class Mensagem implements Serializable {
     private Usuario destino;
     @Lob
     private String texto;
+
     private LocalDateTime criadoEm;
 
     {

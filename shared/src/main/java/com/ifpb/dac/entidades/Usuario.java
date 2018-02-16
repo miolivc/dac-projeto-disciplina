@@ -11,10 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
-/**
- *
- * @author rodrigobento
- */
 @Entity
 @SequenceGenerator(name = "minha_seq_usu",
         sequenceName = "seq_usu",
@@ -97,7 +93,8 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", Tipo=" + tipo + ", logado=" + logado + '}';
+        return "Usuario{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", senha="
+                + senha + ", Tipo=" + tipo + ", logado=" + logado + '}';
     }
     
     
