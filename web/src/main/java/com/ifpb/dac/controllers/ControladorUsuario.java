@@ -1,14 +1,8 @@
 package com.ifpb.dac.controllers;
 
-import com.ifpb.dac.entidades.Aluno;
-import com.ifpb.dac.entidades.Pedido;
-import com.ifpb.dac.entidades.Professor;
-import com.ifpb.dac.entidades.Usuario;
-import com.ifpb.dac.enums.Tipo;
-import com.ifpb.dac.interfaces.AlunoDao;
-import com.ifpb.dac.interfaces.PedidoDao;
-import com.ifpb.dac.interfaces.ProfessorDao;
-import com.ifpb.dac.interfaces.UsuarioDao;
+import com.ifpb.dac.entidades.*;
+import com.ifpb.dac.enums.TipoUsuario;
+import com.ifpb.dac.interfaces.*;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +19,7 @@ import javax.servlet.http.HttpSession;
  */
 @Named
 @RequestScoped
-public class ControladorUsuario implements Serializable {
+public class  ControladorUsuario implements Serializable {
 
     @Inject
     private UsuarioDao usuarioDao;
@@ -35,12 +29,17 @@ public class ControladorUsuario implements Serializable {
     private AlunoDao alunoDao;
     @Inject
     private ProfessorDao professorDao;
+    @Inject
+    private CoordenadorDao coordenadorDao;
+
     private String valorSelect;
     private boolean cad = false;
-    private List<String> tiposUsuario = Arrays.asList("Professor", "Aluno");
+    private List<String> tiposUsuario = Arrays.asList("Professor", "Aluno", "Coordenador");
     private Professor professor = new Professor();
     private Usuario usuario = new Usuario();
     private HttpSession sessao;
+
+    private Coordenador coordenador;
 
     public List<String> getTiposUsuario() {
         return tiposUsuario;
@@ -78,10 +77,18 @@ public class ControladorUsuario implements Serializable {
         return "cadastros/cadastro.xhtml";
     }
 
+    public Coordenador getCoordenador() {
+        return coordenador;
+    }
+
+    public void setCoordenador(Coordenador coordenador) {
+        this.coordenador = coordenador;
+    }
+
     public String realizarLogin() {
-        Tipo tipo = Enum.valueOf(Tipo.class, valorSelect);
+        TipoUsuario tipo = Enum.valueOf(TipoUsuario.class, valorSelect);
         // Caso seja login de professor
-        if (tipo.equals(Tipo.Professor)) {
+        if (tipo.equals(TipoUsuario.Professor)) {
             Professor autentica = professorDao.autentica(usuario.getEmail(), usuario.getSenha());
             usuario = new Usuario();
             if (autentica != null) {
@@ -98,7 +105,25 @@ public class ControladorUsuario implements Serializable {
                 mostrarMensagem("Email e senha invalidos!");
                 return null;
             }
-        } else {
+        } else if(tipo.equals(TipoUsuario.Coordenador)) {
+            Coordenador autenticado = coordenadorDao.autentica(usuario.getEmail(),
+                    usuario.getSenha());
+            usuario = new Usuario();
+            if (autenticado == null) {
+                mostrarMensagem("Email e senha invalidos!");
+                return null;
+            } else {
+                if (autenticado.isLogado()) {
+                    iniciarSessao();
+                    sessao.setAttribute("coordenador", autenticado);
+                    sessao.setAttribute("credenciais", "coordenador");
+                    return "principal.xhtml";
+                } else {
+                    atualizarPedido(autenticado.getEmail(), autenticado.getSenha());
+                    return null;
+                }
+            }
+        } else if(tipo.equals(TipoUsuario.Aluno)) {
             Aluno autenticado = alunoDao.autentica(usuario.getEmail(),
                     usuario.getSenha());
             usuario = new Usuario();
@@ -113,10 +138,10 @@ public class ControladorUsuario implements Serializable {
                     return "principal.xhtml";
                 } else {
                     atualizarPedido(autenticado.getEmail(), autenticado.getSenha());
-                    return null;
                 }
             }
         }
+        return null;
     }
 
     public String entrarComoPublico() {

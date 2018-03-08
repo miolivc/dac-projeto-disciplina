@@ -52,16 +52,29 @@
                     <h:commandButton class="btn btn-primary"
                                      value="Login" 
                                      action="#{controladorUsuario.realizarLogin()}"/>
-
-
-
+                    <br></br>
                     <h:form>
+
                         <h:commandButton class="btn btn-primary"
                                          immediate="true"
                                          value="Realizar cadastro de aluno"
                                          style="margin-left: 20px;"
                                          action="#{controladorUsuario.navegarCadastro()}"/>
-                        <br></br>
+                    </h:form>
+
+                    <h:form>
+                        <h:commandButton class="btn btn-primary"
+                                         immediate="true"
+                                         value="Realizar cadastro de Professor"
+                                         style="margin-left: 20px;"
+                                         action="#{controladorUsuario.navegarCadastro()}"/>
+                    </h:form>
+                    <h:form>
+                        <h:commandButton class="btn btn-primary"
+                                         immediate="true"
+                                         value="Realizar cadastro de Coordenador"
+                                         style="margin-left: 20px;"
+                                         action="#{controladorUsuario.navegarCadastro()}"/>
                     </h:form>
                 </h:form>
 

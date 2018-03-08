@@ -1,14 +1,8 @@
 package com.ifpb.dac.controllers;
 
-import com.ifpb.dac.entidades.Aluno;
-import com.ifpb.dac.entidades.Pedido;
-import com.ifpb.dac.entidades.Professor;
-import com.ifpb.dac.entidades.Usuario;
-import com.ifpb.dac.enums.Tipo;
-import com.ifpb.dac.interfaces.AlunoDao;
-import com.ifpb.dac.interfaces.PedidoDao;
-import com.ifpb.dac.interfaces.ProfessorDao;
-import com.ifpb.dac.interfaces.UsuarioDao;
+import com.ifpb.dac.entidades.*;
+import com.ifpb.dac.enums.TipoUsuario;
+import com.ifpb.dac.interfaces.*;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,6 +29,9 @@ public class ControladorAdmin implements Serializable {
     private AlunoDao alunoDao;
     @Inject
     private PedidoDao pedidoDao;
+    @Inject
+    private CoordenadorDao coordenadorDao;
+
     private Usuario usuario = new Usuario();
     private Aluno aluno = new Aluno();
     private List<Pedido> pedidos = new ArrayList<>();
@@ -57,7 +54,7 @@ public class ControladorAdmin implements Serializable {
 
     public String realizarLogin() {
         Usuario admin = usuarioDao.autentica(usuario.getEmail(),
-                usuario.getSenha(), Tipo.Administrador);
+                usuario.getSenha(), TipoUsuario.Administrador);
         if (admin != null) {
             return "menu.xhtml";
         } else {
@@ -67,14 +64,17 @@ public class ControladorAdmin implements Serializable {
     }
 
     public String liberarAcesso(Pedido p) {
-        if (p.getTipo().equals(Tipo.Aluno)) {
+        if (p.getTipoUsuario().equals(TipoUsuario.Aluno)) {
+
             Aluno alunoLib = alunoDao.autentica(p.getEmail(), p.getSenha());
             if (alunoLib != null) {
                 alunoLib.setLogado(true);
                 alunoDao.atualizar(alunoLib);
                 pedidoDao.remover(p);
             }
-        } else {
+
+        } else if (p.getTipoUsuario().equals(TipoUsuario.Professor)) {
+
             Professor prof = professorDao.autentica(p.getEmail(), p.getSenha());
 //            Usuario usuLiberado = usuarioDao.autentica(p.getEmail(), p.getSenha(),
 //                    p.getTipo());
@@ -83,7 +83,17 @@ public class ControladorAdmin implements Serializable {
                 professorDao.atualizar(prof);
                 pedidoDao.remover(p);
             }
-        }        
+
+        } else if (p.getTipoUsuario().equals(TipoUsuario.Coordenador)) {
+
+            Coordenador coord = coordenadorDao.autentica(p.getEmail(), p.getSenha());
+            if (coord != null) {
+                coord.setLogado(true);
+                coordenadorDao.atualizar(coord);
+                pedidoDao.remover(p);
+            }
+
+        }
         return null;
     }
 

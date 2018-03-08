@@ -1,7 +1,7 @@
 package com.ifpb.dac.infra;
 
 import com.ifpb.dac.entidades.Usuario;
-import com.ifpb.dac.enums.Tipo;
+import com.ifpb.dac.enums.TipoUsuario;
 import com.ifpb.dac.interfaces.UsuarioDao;
 import java.util.List;
 import java.util.Optional;
@@ -50,7 +50,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
     }
 
     @Override
-    public Usuario autentica(String email, String senha, Tipo tipo) {
+    public Usuario autentica(String email, String senha, TipoUsuario tipo) {
         TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE "
                 + "u.email =:email AND u.senha =:senha AND u.tipo =:tipo", Usuario.class);
         query.setParameter("email", email.toLowerCase());

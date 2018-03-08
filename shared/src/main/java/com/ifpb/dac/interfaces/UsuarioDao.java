@@ -1,7 +1,8 @@
 package com.ifpb.dac.interfaces;
 
 import com.ifpb.dac.entidades.Usuario;
-import com.ifpb.dac.enums.Tipo;
+import com.ifpb.dac.enums.TipoUsuario;
+
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public interface UsuarioDao {
     void atualizar(Usuario usuario);
     List<Usuario> listarTodos();
     Usuario buscarPorId(int id);
-    Usuario autentica(String email, String senha, Tipo tipo);
+    Usuario autentica(String email, String senha, TipoUsuario tipo);
     boolean verificarEmail(String email);
     
 }
