@@ -1,0 +1,9 @@
+<ion-view view-title="Horarios"  id="horarios" ng-controller="HorariosCtrl">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="item in horarios"  href="#/app/verhorario/{{item.id}}">
+        {{item.title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
