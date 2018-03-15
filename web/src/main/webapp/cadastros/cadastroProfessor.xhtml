@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <h:outputLabel for="nome" class="text-left col-md-12" value="Nome: ">
                             <h:inputText id="nome" 
-                                         value="#{controladorCadastro.coordenador.nome}"
+                                         value="#{controladorCadastro.professor.nome}"
                                          maxlength="40"
                                          class="form-control col-md-12"
                                          required="true"
@@ -32,7 +32,7 @@
                     <div class="form-group">
                         <h:outputLabel for="email" class="text-left col-md-12" value="Email: ">
                             <h:inputText id="email" 
-                                         value="#{controladorCadastro.coordenador.email}"
+                                         value="#{controladorCadastro.professor.email}"
                                          maxlength="40"
                                          class="form-control col-md-12"
                                          required="true"
@@ -44,7 +44,7 @@
                     <div class="form-group">
                         <h:outputLabel for="senha" class="text-left col-md-12" value="Senha: ">
                             <h:inputSecret id="senha" 
-                                           value="#{controladorCadastro.coordenador.senha}"
+                                           value="#{controladorCadastro.professor.senha}"
                                            maxlength="20"
                                            class="form-control col-md-12"
                                            required="true"
@@ -65,7 +65,7 @@
                     <div class="form-group">
                         <h:outputLabel for="unidade" class="text-left col-md-12" value="Informe a unidade: ">                        
                             <h:selectOneMenu class="form-control" id="unidade" 
-                                             value="#{controladorCadastro.coordenador.unidade}">
+                                             value="#{controladorCadastro.professor.unidade}">
                                 <f:selectItems value="#{controladorCadastro.unidades()}" 
                                                var="cur"
                                                itemLabel="#{cur}"
@@ -76,7 +76,7 @@
                     <div class="form-group">
                         <h:outputLabel for="vinculo" class="text-left col-md-12" value="Informe o vinculo: ">                        
                             <h:selectOneMenu class="form-control" id="vinculo" 
-                                             value="#{controladorCadastro.coordenador.vinculo}">
+                                             value="#{controladorCadastro.professor.vinculo}">
                                 <f:selectItems value="#{controladorCadastro.vinculos()}" 
                                                var="cur"
                                                itemLabel="#{cur}"
@@ -87,7 +87,7 @@
                     <br></br>
                     <h:commandButton value="Cadastrar"
                                      class="btn btn-primary"
-                                     action="#{controladorCadastro.cadastrarCoordenador()}" />
+                                     action="#{controladorCadastro.cadastrarProfessor()}" />
                     <h:form>
                         <h:commandButton value="Voltar"
                                          immediate="true"
