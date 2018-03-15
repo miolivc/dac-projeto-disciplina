@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cadastro de Coordenador</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script src="../bootstrap/js/jquery-3.2.1.min.js"/>
+        <script src="../bootstrap/js/bootstrap.js"/>
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.css"/>
+        <link rel="stylesheet" href="./css/style.css" />
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="row text-center">
+                <h1>Cadastro de Coordenador</h1>
+                <hr />
+            </div>
+            <div class="row text-center">
+                <h:form class="form-horizontal box-main-login">
+                    <div class="form-group">
+                        <h:outputLabel for="nome" class="text-left col-md-12" value="Nome: ">
+                            <h:inputText id="nome" 
+                                         value="#{controladorCadastro.nome}"
+                                         maxlength="40"
+                                         class="form-control col-md-12"
+                                         required="true"
+                                         requiredMessage="Informe um nome valido"/>
+                        </h:outputLabel>         
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="email" class="text-left col-md-12" value="Email: ">
+                            <h:inputText id="email" 
+                                         value="#{controladorCadastro.email}"
+                                         maxlength="40"
+                                         class="form-control col-md-12"
+                                         required="true"
+                                         requiredMessage="Informe um email valido">
+                                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                            </h:inputText>
+                        </h:outputLabel>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="senha" class="text-left col-md-12" value="Senha: ">
+                            <h:inputSecret id="senha" 
+                                           value="#{controladorCadastro.senha}"
+                                           maxlength="20"
+                                           class="form-control col-md-12"
+                                           required="true"
+                                           requiredMessage="Informe uma senha valida"/>
+                        </h:outputLabel>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="regime" class="text-left col-md-12" value="Informe o regime: ">                        
+                            <h:selectOneMenu class="form-control" id="regime" 
+                                             value="#{controladorCadastro.valorSelect}">
+                                <f:selectItems value="#{controladorCadastro.coordenador.regime}" 
+                                               var="cur"
+                                               itemLabel="#{cur}"
+                                               itemValue="#{cur}"/>
+                            </h:selectOneMenu>
+                        </h:outputLabel>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="unidade" class="text-left col-md-12" value="Informe a unidade: ">                        
+                            <h:selectOneMenu class="form-control" id="unidade" 
+                                             value="#{controladorCadastro.valorSelect}">
+                                <f:selectItems value="#{controladorCadastro.unidade}" 
+                                               var="cur"
+                                               itemLabel="#{cur}"
+                                               itemValue="#{cur}"/>
+                            </h:selectOneMenu>
+                        </h:outputLabel>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="vinculo" class="text-left col-md-12" value="Informe o vinculo: ">                        
+                            <h:selectOneMenu class="form-control" id="vinculo" 
+                                             value="#{controladorCadastro.valorSelect}">
+                                <f:selectItems value="#{controladorCadastro.vinculo}" 
+                                               var="cur"
+                                               itemLabel="#{cur}"
+                                               itemValue="#{cur}"/>
+                            </h:selectOneMenu>
+                        </h:outputLabel>
+                    </div>
+                    <br></br>
+                    <h:commandButton value="Cadastrar"
+                                     class="btn btn-primary"
+                                     action="#{controladorCadastro.cadastrarCoordenador()}" />
+                    <h:form>
+                        <h:commandButton value="Voltar"
+                                         immediate="true"
+                                         class="btn btn-primary"
+                                         action="#{controladorCadastro.voltar()}"/>
+                    </h:form>
+                </h:form>
+
+            </div>
+        </div>
+    </h:body>
+</html>
