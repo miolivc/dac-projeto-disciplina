@@ -51,39 +51,7 @@
                                            requiredMessage="Informe uma senha valida"/>
                         </h:outputLabel>
                     </div>
-                    <div class="form-group">
-                        <h:outputLabel for="regime" class="text-left col-md-12" value="Informe o regime: ">                        
-                            <h:selectOneMenu class="form-control" id="regime" 
-                                             value="#{controladorCadastro.valorSelect}">
-                                <f:selectItems value="#{controladorCadastro.coordenador.regime}" 
-                                               var="cur"
-                                               itemLabel="#{cur}"
-                                               itemValue="#{cur}"/>
-                            </h:selectOneMenu>
-                        </h:outputLabel>
-                    </div>
-                    <div class="form-group">
-                        <h:outputLabel for="unidade" class="text-left col-md-12" value="Informe a unidade: ">                        
-                            <h:selectOneMenu class="form-control" id="unidade" 
-                                             value="#{controladorCadastro.valorSelect}">
-                                <f:selectItems value="#{controladorCadastro.unidade}" 
-                                               var="cur"
-                                               itemLabel="#{cur}"
-                                               itemValue="#{cur}"/>
-                            </h:selectOneMenu>
-                        </h:outputLabel>
-                    </div>
-                    <div class="form-group">
-                        <h:outputLabel for="vinculo" class="text-left col-md-12" value="Informe o vinculo: ">                        
-                            <h:selectOneMenu class="form-control" id="vinculo" 
-                                             value="#{controladorCadastro.valorSelect}">
-                                <f:selectItems value="#{controladorCadastro.vinculo}" 
-                                               var="cur"
-                                               itemLabel="#{cur}"
-                                               itemValue="#{cur}"/>
-                            </h:selectOneMenu>
-                        </h:outputLabel>
-                    </div>
+                    
                     <br></br>
                     <h:commandButton value="Cadastrar"
                                      class="btn btn-primary"

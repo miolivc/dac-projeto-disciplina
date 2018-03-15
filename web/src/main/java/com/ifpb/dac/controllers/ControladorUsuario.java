@@ -77,6 +77,10 @@ public class  ControladorUsuario implements Serializable {
         return "cadastros/cadastro.xhtml";
     }
 
+    public String navegarCadastroCoordenador() {
+        return "cadastros/cadastroCoordenador.xhtml";
+    }
+    
     public Coordenador getCoordenador() {
         return coordenador;
     }
