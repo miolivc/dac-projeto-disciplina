@@ -1,6 +1,7 @@
 package com.ifpb.dac.controllers;
 
 import com.ifpb.dac.entidades.Aluno;
+import com.ifpb.dac.entidades.Coordenador;
 import com.ifpb.dac.entidades.Curso;
 import com.ifpb.dac.entidades.Pedido;
 import com.ifpb.dac.entidades.Usuario;
@@ -37,6 +38,7 @@ public class ControladorCadastro implements Serializable {
     @Inject
     private CoordenadorDao coordenadorDao;
 
+    private Coordenador coordenador = new Coordenador();
     private String nome;
     private String email;
     private String senha;
@@ -83,6 +85,14 @@ public class ControladorCadastro implements Serializable {
         this.valorSelect = valorSelect;
     }
 
+    public Coordenador getCoordenador() {
+        return coordenador;
+    }
+
+    public void setCoordenador(Coordenador coordenador) {
+        this.coordenador = coordenador;
+    }
+    
     public void cadastrar() {
         System.out.println(valorSelect);
         Curso curso = cursoDao.retornarPorNome(valorSelect);
@@ -126,10 +136,12 @@ public class ControladorCadastro implements Serializable {
         if (verificarEmail) {
             mostrarMensagem("Esse email ja esta cadastado na base de dados");
         } else {
-            Usuario usuario = new Usuario(nome, email, senha, TipoUsuario.Coordenador, false);
+            Usuario usuario = new Usuario(coordenador.getNome(), coordenador.getEmail(),
+                    coordenador.getSenha(), TipoUsuario.Coordenador, false);
             Pedido p = new Pedido(nome, email, senha, TipoUsuario.Professor, 1);
             pedidoDao.adicionar(p);
             usuarioDao.adicionar(usuario);
+            coordenadorDao.adicionar(coordenador);
             limparCampos();
             redirecionar();
         }
@@ -155,6 +167,7 @@ public class ControladorCadastro implements Serializable {
         nome = "";
         email = "";
         senha = "";
+        coordenador = new Coordenador();
     }
 
 }
