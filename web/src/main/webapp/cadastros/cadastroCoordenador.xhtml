@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <h:outputLabel for="nome" class="text-left col-md-12" value="Nome: ">
                             <h:inputText id="nome" 
-                                         value="#{controladorCadastro.nome}"
+                                         value="#{controladorCadastro.coordenador.nome}"
                                          maxlength="40"
                                          class="form-control col-md-12"
                                          required="true"
@@ -32,7 +32,7 @@
                     <div class="form-group">
                         <h:outputLabel for="email" class="text-left col-md-12" value="Email: ">
                             <h:inputText id="email" 
-                                         value="#{controladorCadastro.email}"
+                                         value="#{controladorCadastro.coordenador.email}"
                                          maxlength="40"
                                          class="form-control col-md-12"
                                          required="true"
@@ -44,14 +44,46 @@
                     <div class="form-group">
                         <h:outputLabel for="senha" class="text-left col-md-12" value="Senha: ">
                             <h:inputSecret id="senha" 
-                                           value="#{controladorCadastro.senha}"
+                                           value="#{controladorCadastro.coordenador.senha}"
                                            maxlength="20"
                                            class="form-control col-md-12"
                                            required="true"
                                            requiredMessage="Informe uma senha valida"/>
                         </h:outputLabel>
                     </div>
-                    
+                    <div class="form-group">
+                        <h:outputLabel for="regime" class="text-left col-md-12" value="Informe o regime: ">                        
+                            <h:selectOneMenu class="form-control" id="regime" 
+                                             value="#{controladorCadastro.coordenador.regime}">
+                                <f:selectItems value="#{controladorCadastro.coordenador.regime}" 
+                                               var="cur"
+                                               itemLabel="#{cur}"
+                                               itemValue="#{cur}"/>
+                            </h:selectOneMenu>
+                        </h:outputLabel>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="unidade" class="text-left col-md-12" value="Informe a unidade: ">                        
+                            <h:selectOneMenu class="form-control" id="unidade" 
+                                             value="#{controladorCadastro.coordenador.unidade}">
+                                <f:selectItems value="#{controladorCadastro.coordenador.unidade}" 
+                                               var="cur"
+                                               itemLabel="#{cur}"
+                                               itemValue="#{cur}"/>
+                            </h:selectOneMenu>
+                        </h:outputLabel>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="vinculo" class="text-left col-md-12" value="Informe o vinculo: ">                        
+                            <h:selectOneMenu class="form-control" id="vinculo" 
+                                             value="#{controladorCadastro.coordenador.vinculo}">
+                                <f:selectItems value="#{controladorCadastro.coordenador.vinculo}" 
+                                               var="cur"
+                                               itemLabel="#{cur}"
+                                               itemValue="#{cur}"/>
+                            </h:selectOneMenu>
+                        </h:outputLabel>
+                    </div>
                     <br></br>
                     <h:commandButton value="Cadastrar"
                                      class="btn btn-primary"
