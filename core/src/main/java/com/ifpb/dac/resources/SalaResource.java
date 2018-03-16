@@ -4,8 +4,11 @@ package com.ifpb.dac.resources;
 import com.ifpb.dac.interfaces.LaboratorioDao;
 import com.ifpb.dac.interfaces.SalaDao;
 import java.util.List;
+import java.util.stream.Collector;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.json.Json;
+import javax.json.JsonArray;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -30,9 +33,12 @@ public class SalaResource {
         if (salas == null || salas.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        
-        GenericEntity answer = new GenericEntity<List<String>>(salas){};
-        return Response.ok().entity(answer).build();
+        JsonArray collect = salas.stream()
+                .collect(Collector.of(Json::createArrayBuilder, 
+                        (t, u) -> t.add(u), 
+                        (x, y) -> x.add(y)))
+                .build();
+        return Response.ok().entity(collect).build();
     }
     
     
@@ -43,9 +49,12 @@ public class SalaResource {
         if (labs == null || labs.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        
-        GenericEntity answer = new GenericEntity<List<String>>(labs){};
-        return Response.ok().entity(answer).build();
+        JsonArray collect = labs.stream()
+                .collect(Collector.of(Json::createArrayBuilder, 
+                        (t, u) -> t.add(u), 
+                        (x, y) -> x.add(y)))
+                .build();
+        return Response.ok().entity(labs).build();
     }
     
 }

@@ -3,8 +3,11 @@ package com.ifpb.dac.resources;
 
 import com.ifpb.dac.interfaces.TurmaDao;
 import java.util.List;
+import java.util.stream.Collector;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.json.Json;
+import javax.json.JsonArray;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -26,8 +29,11 @@ public class TurmaResource {
         if (turmas == null || turmas.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-//        GenericEntity answer = new GenericEntity<List<String>>(turmas){};
-//        return Response.ok().entity(answer).build();
+        JsonArray collect = turmas.stream()
+                .collect(Collector.of(Json::createArrayBuilder, 
+                        (t, u) -> t.add(u), 
+                        (x, y) -> x.add(y)))
+                .build();
         return Response.ok(turmas).build();
     }
     
@@ -38,8 +44,11 @@ public class TurmaResource {
         if (professores == null || professores.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-//        GenericEntity answer = new GenericEntity<List<String>>(professores){};
-//        return Response.ok().entity(answer).build();
+        JsonArray collect = professores.stream()
+                .collect(Collector.of(Json::createArrayBuilder, 
+                        (t, u) -> t.add(u), 
+                        (x, y) -> x.add(y)))
+                .build();
         return Response.ok(professores).build();
     }
     
@@ -50,8 +59,11 @@ public class TurmaResource {
         if (disciplinas == null || disciplinas.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-//        GenericEntity answer = new GenericEntity<List<String>>(disciplinas){};
-//        return Response.ok().entity(answer).build();
+      JsonArray collect = disciplinas.stream()
+                .collect(Collector.of(Json::createArrayBuilder, 
+                        (t, u) -> t.add(u), 
+                        (x, y) -> x.add(y)))
+                .build();
         return Response.ok(disciplinas).build();
     }
     

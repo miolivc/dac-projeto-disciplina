@@ -3,12 +3,13 @@ package com.ifpb.dac.resources;
 
 import com.ifpb.dac.interfaces.CursoDao;
 import java.util.List;
+import java.util.stream.Collector;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.json.*;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -26,8 +27,12 @@ public class CursoResource {
         if (nomeCursos == null || nomeCursos.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        GenericEntity<List<String>> answer = new GenericEntity<List<String>>(nomeCursos){};
-        return Response.ok().entity(answer).build();
+        JsonArray collect = nomeCursos.stream()
+                .collect(Collector.of(Json::createArrayBuilder, 
+                        (t,u) -> t.add(u), 
+                        (x, y) -> x.add(y)))
+                .build();
+        return Response.ok().entity(collect).build();
     }
     
 }

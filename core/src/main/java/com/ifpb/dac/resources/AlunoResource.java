@@ -5,6 +5,7 @@ import com.ifpb.dac.entidades.Aluno;
 import com.ifpb.dac.entidades.Pedido;
 import com.ifpb.dac.interfaces.AlunoDao;
 import com.ifpb.dac.interfaces.PedidoDao;
+import com.ifpb.dac.resouces.security.BasicAuth;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.FormParam;
@@ -38,9 +39,12 @@ public class AlunoResource {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
         
-        // Criar um gerador de Token para retornar e barrar as proximas requisicoes
-        return Response.ok().build();
+        String encode = BasicAuth.encode(email, password);
+        String answer = String.format("{'Authorization': %s}", encode);
+        
+        return Response.ok()
+                .entity(answer)
+                .build();
     }
-    
-    
+      
 }
