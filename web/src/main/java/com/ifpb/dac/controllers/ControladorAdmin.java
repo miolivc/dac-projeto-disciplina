@@ -33,8 +33,8 @@ public class ControladorAdmin implements Serializable {
     private CoordenadorDao coordenadorDao;
 
     private Usuario usuario = new Usuario();
-    private Aluno aluno = new Aluno();
     private List<Pedido> pedidos = new ArrayList<>();
+    private TipoUsuario filtroPedidos; 
 
     public Usuario getUsuario() {
         return usuario;
@@ -44,8 +44,21 @@ public class ControladorAdmin implements Serializable {
         this.usuario = usuario;
     }
 
+    public TipoUsuario getFiltroPedidos() {
+        return filtroPedidos;
+    }
+
+    public void setFiltroPedidos(TipoUsuario filtroPedidos) {
+        this.filtroPedidos = filtroPedidos;
+    }
+    
     public List<Pedido> getPedidos() {
-        return pedidoDao.listarTodos();
+//        return pedidoDao.listarTodos();
+        return pedidoDao.listarPedidosPorTipoUsuario(TipoUsuario.Coordenador);
+    }
+    
+    public List<Pedido> getPedidos(TipoUsuario tipo) {
+        return pedidoDao.listarPedidosPorTipoUsuario(tipo);
     }
 
     public void setPedidos(List<Pedido> pedidos) {
@@ -104,7 +117,6 @@ public class ControladorAdmin implements Serializable {
         try {
             externalContext.redirect("../index.xhtml");
         } catch (IOException ex) {
-            ex.printStackTrace();
         }
     }
 

@@ -84,6 +84,17 @@
                             </h:selectOneMenu>
                         </h:outputLabel>
                     </div>
+                    <div class="form-group">
+                        <h:outputLabel for="curso" class="text-left col-md-12" value="Informe o curso: ">                        
+                            <h:selectOneMenu class="form-control" id="curso" 
+                                             value="#{controladorCadastro.valorSelect}">
+                                <f:selectItems value="#{controladorCadastro.cursos}" 
+                                               var="cur"
+                                               itemLabel="#{cur}"
+                                               itemValue="#{cur}"/>
+                            </h:selectOneMenu>
+                        </h:outputLabel>
+                    </div>
                     <br></br>
                     <h:commandButton value="Cadastrar"
                                      class="btn btn-primary"

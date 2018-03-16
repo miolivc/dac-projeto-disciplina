@@ -125,6 +125,7 @@ public class  ControladorUsuario implements Serializable {
                     iniciarSessao();
                     sessao.setAttribute("coordenador", autenticado);
                     sessao.setAttribute("credenciais", "coord");
+                    sessao.setAttribute("curso", coordenador.getCurso());
                     return "principal.xhtml";
                 } else {
                     atualizarPedido(autenticado.getEmail(), autenticado.getSenha());

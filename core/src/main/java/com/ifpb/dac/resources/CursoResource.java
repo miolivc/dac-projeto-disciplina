@@ -26,7 +26,7 @@ public class CursoResource {
         if (nomeCursos == null || nomeCursos.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        GenericEntity answer = new GenericEntity<List<String>>(nomeCursos){};
+        GenericEntity<List<String>> answer = new GenericEntity<List<String>>(nomeCursos){};
         return Response.ok().entity(answer).build();
     }
     

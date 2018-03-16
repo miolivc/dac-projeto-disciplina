@@ -36,6 +36,9 @@ public class Coordenador implements Serializable {
     @Column(name = "vinculo")
     @Enumerated(EnumType.STRING)
     private Vinculo vinculo;
+    
+    @OneToOne(fetch = FetchType.LAZY)
+    private Curso curso;
 
     private boolean logado;
 
@@ -115,6 +118,14 @@ public class Coordenador implements Serializable {
 
     public void setLogado(boolean logado) {
         this.logado = logado;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
     
 }

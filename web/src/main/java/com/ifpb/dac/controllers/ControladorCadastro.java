@@ -158,9 +158,13 @@ public class ControladorCadastro implements Serializable {
             Usuario usuario = new Usuario(coordenador.getNome(), coordenador.getEmail(),
                     coordenador.getSenha(), TipoUsuario.Coordenador, false);
             Pedido p = new Pedido(coordenador.getNome(), coordenador.getEmail(),
-                    coordenador.getSenha(), TipoUsuario.Professor, 1);
+                    coordenador.getSenha(), TipoUsuario.Coordenador, 1);
+            
+            coordenador.setCurso(cursoDao.retornarPorNome(valorSelect));
+            
             pedidoDao.adicionar(p);
             usuarioDao.adicionar(usuario);
+            
             coordenadorDao.adicionar(coordenador);
             limparCampos();
             redirecionar();

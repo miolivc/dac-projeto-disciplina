@@ -84,6 +84,12 @@
                             class="item-menu col-sm-12 col-md-3"
                             rendered="#{controladorMenu.credenciais eq 'prof' or 'coord'}"
                             value="Responder Dúvidas" />
+                    
+                    <h:link outcome="coordenador/gerenciar.xhtml"
+                            class="item-menu col-sm-12 col-md-3"
+                            rendered="#{controladorMenu.credenciais eq 'coord'}"
+                            value="Gerenciar Pedidos de Acesso"/>
+                    
 
                 </div> <!-- .col-md-12 -->    
             </div> <!-- .row -->
