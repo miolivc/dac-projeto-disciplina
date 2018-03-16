@@ -62,27 +62,27 @@
 
                     <h:link outcome="professor/adicionarAtividade.xhtml"
                             class="item-menu col-sm-12 col-md-3"
-                            rendered="#{controladorMenu.credenciais eq 'prof'}"
+                            rendered="#{controladorMenu.credenciais eq 'prof' or 'coord'}"
                             value="Adicionar Atividades" />
 
                     <h:link outcome="professor/removerAtividade.xhtml"
                             class="item-menu col-sm-12 col-md-3"
-                            rendered="#{controladorMenu.credenciais eq 'prof'}"
+                            rendered="#{controladorMenu.credenciais eq 'prof' or 'coord'}"
                             value="Remover Atividades" />
 
                     <h:link outcome="professor/cadastroMaterial.xhtml"
                             class="item-menu col-sm-12 col-md-3"
-                            rendered="#{controladorMenu.credenciais eq 'prof'}"
+                            rendered="#{controladorMenu.credenciais eq 'prof' or 'coord'}"
                             value="Adicionar Materiais" />
 
                     <h:link outcome="professor/removerMaterial.xhtml"
                             class="item-menu col-sm-12 col-md-3"
-                            rendered="#{controladorMenu.credenciais eq 'prof'}"
+                            rendered="#{controladorMenu.credenciais eq 'prof' or 'coord'}"
                             value="Remover Materiais" />
 
                     <h:link outcome="professor/responderDuvida.xhtml"
                             class="item-menu col-sm-12 col-md-3"
-                            rendered="#{controladorMenu.credenciais eq 'prof'}"
+                            rendered="#{controladorMenu.credenciais eq 'prof' or 'coord'}"
                             value="Responder Dúvidas" />
 
                 </div> <!-- .col-md-12 -->    

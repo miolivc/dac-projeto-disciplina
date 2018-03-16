@@ -71,11 +71,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
                 + "Usuario u WHERE u.email =:email", Usuario.class);
         createQuery.setParameter("email", email);
         Optional<Usuario> findFirst = createQuery.getResultList().stream().findFirst();
-        if (findFirst.isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+        return findFirst.isPresent();
     }
 
 }

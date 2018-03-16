@@ -1,5 +1,6 @@
 package com.ifpb.dac.infra;
 
+import com.ifpb.dac.entidades.PerfilProfessor;
 import com.ifpb.dac.entidades.Professor;
 import com.ifpb.dac.interfaces.ProfessorDao;
 import java.util.List;
@@ -84,11 +85,16 @@ public class ProfessorDaoImpl implements ProfessorDao {
                 + "WHERE p.email =:email", Professor.class);
         createQuery.setParameter("email", email);
         Optional<Professor> findFirst = createQuery.getResultList().stream().findFirst();
-        if(findFirst.isPresent()){
-            return true;
-        } else {
-            return false;
-        }
+        return findFirst.isPresent();
+    }
+
+    @Override
+    public List<PerfilProfessor> todosOsPerfisProfessores() {
+        TypedQuery<PerfilProfessor> createQuery = 
+                em.createQuery("SELECT p.codigo, p.nome, p.email FROM Professor p", 
+                        PerfilProfessor.class);
+        List<PerfilProfessor> resultList = createQuery.getResultList();
+        return resultList;
     }
     
 }

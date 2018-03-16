@@ -1,7 +1,6 @@
 package com.ifpb.dac.infra;
 
 import com.ifpb.dac.entidades.Aluno;
-import com.ifpb.dac.entidades.Usuario;
 import com.ifpb.dac.interfaces.AlunoDao;
 import java.util.List;
 import java.util.Optional;
@@ -69,11 +68,7 @@ public class AlunoDaoImpl implements AlunoDao {
                 + "Aluno a WHERE a.email =:email", Aluno.class);
         createQuery.setParameter("email", email);
         Optional<Aluno> findFirst = createQuery.getResultList().stream().findFirst();
-        if (findFirst.isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+        return findFirst.isPresent();
     }
     
 }
