@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Gerenciar</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script src="../bootstrap/js/jquery-3.2.1.min.js"/>
+        <script src="../bootstrap/js/bootstrap.js"/>
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.css"/>
+        <link rel="stylesheet" href="../css/style.css" />
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="row text-center">
+                <h2>
+                    <h:outputText value="Todos os pedidos de acesso"/>
+                </h2>
+                <br/><br/>
+                <h:link outcome="../principal.xhtml" class="btn btn-warning" value="Voltar"/>
+            </div>
+                
+            <br /><br />
+            
+            <div class="row">
+                <h:form>
+                    <h:dataTable class="table table-hover" 
+                                 value="#{controladorCoordenador.pedidos}" var="pedido">
+                        <h:column>
+                            <f:facet name="header">Nome</f:facet>
+                            <h:outputText value="#{pedido.nome}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Email</f:facet>
+                            <h:outputText value="#{pedido.email}"/>
+                        </h:column>
+                        <!--<h:column>-->
+                            <!--<f:facet name="header">Senha</f:facet>-->
+                            <!--<h:outputText value="#{pedido.senha}"/>-->
+                        <!--</h:column>-->
+                        <h:column>
+                            <f:facet name="header">Liberar</f:facet>
+                            <h:commandButton class="btn btn-primary"
+                                             value="Liberar Acesso"
+                                             action="#{controladorCoordenador.liberarAcesso(pedido)}"/>
+                        </h:column>
+                        
+                    </h:dataTable>
+                </h:form>
+            </div>
+        </div>
+    </h:body>
+</html>

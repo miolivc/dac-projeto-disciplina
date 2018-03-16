@@ -81,6 +81,10 @@ public class  ControladorUsuario implements Serializable {
         return "cadastros/cadastroCoordenador.xhtml";
     }
     
+    public String navegarCadastroProfessor() {
+        return "cadastros/cadastroProfessor.xhtml";
+    }
+    
     public Coordenador getCoordenador() {
         return coordenador;
     }
@@ -120,7 +124,8 @@ public class  ControladorUsuario implements Serializable {
                 if (autenticado.isLogado()) {
                     iniciarSessao();
                     sessao.setAttribute("coordenador", autenticado);
-                    sessao.setAttribute("credenciais", "coordenador");
+                    sessao.setAttribute("credenciais", "coord");
+                    sessao.setAttribute("curso", coordenador.getCurso());
                     return "principal.xhtml";
                 } else {
                     atualizarPedido(autenticado.getEmail(), autenticado.getSenha());
@@ -166,8 +171,7 @@ public class  ControladorUsuario implements Serializable {
     }
 
     private void atualizarPedido(String email, String senha) {
-        Pedido p = pedidoDao.buscarPorCredenciais(email,
-                senha);
+        Pedido p = pedidoDao.buscarPorCredenciais(email, senha);
         int incrementoPrioridade = p.getPrioridade() + 1;
         p.setPrioridade(incrementoPrioridade);
         pedidoDao.atualizar(p);

@@ -4,8 +4,12 @@ import com.ifpb.dac.entidades.Aluno;
 import com.ifpb.dac.entidades.Coordenador;
 import com.ifpb.dac.entidades.Curso;
 import com.ifpb.dac.entidades.Pedido;
+import com.ifpb.dac.entidades.Professor;
 import com.ifpb.dac.entidades.Usuario;
+import com.ifpb.dac.enums.Regime;
 import com.ifpb.dac.enums.TipoUsuario;
+import com.ifpb.dac.enums.Unidade;
+import com.ifpb.dac.enums.Vinculo;
 import com.ifpb.dac.interfaces.*;
 
 import java.io.IOException;
@@ -37,7 +41,10 @@ public class ControladorCadastro implements Serializable {
     private AlunoDao alunoDao;
     @Inject
     private CoordenadorDao coordenadorDao;
+    @Inject
+    private ProfessorDao professorDao;
 
+    private Professor professor = new Professor();
     private Coordenador coordenador = new Coordenador();
     private String nome;
     private String email;
@@ -93,6 +100,14 @@ public class ControladorCadastro implements Serializable {
     public void setCoordenador(Coordenador coordenador) {
         this.coordenador = coordenador;
     }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
     
     public void cadastrar() {
         System.out.println(valorSelect);
@@ -123,10 +138,13 @@ public class ControladorCadastro implements Serializable {
         if (verificarEmail) {
             mostrarMensagem("Esse email ja esta cadastado na base de dados");
         } else {
-            Usuario usuario = new Usuario(nome, email, senha, TipoUsuario.Professor, false);
-            Pedido p = new Pedido(nome, email, senha, TipoUsuario.Professor, 1);
+            Usuario usuario = new Usuario(professor.getNome(), professor.getEmail(), 
+                    professor.getSenha(), TipoUsuario.Professor, false);
+            Pedido p = new Pedido(professor.getNome(), professor.getEmail(), 
+                    professor.getSenha(), TipoUsuario.Professor, 1);
             pedidoDao.adicionar(p);
             usuarioDao.adicionar(usuario);
+            professorDao.adicionar(professor);
             limparCampos();
             redirecionar();
         }
@@ -139,13 +157,30 @@ public class ControladorCadastro implements Serializable {
         } else {
             Usuario usuario = new Usuario(coordenador.getNome(), coordenador.getEmail(),
                     coordenador.getSenha(), TipoUsuario.Coordenador, false);
-            Pedido p = new Pedido(coordenador.getNome(), coordenador.getEmail(), coordenador.getSenha(), TipoUsuario.Professor, 1);
+            Pedido p = new Pedido(coordenador.getNome(), coordenador.getEmail(),
+                    coordenador.getSenha(), TipoUsuario.Coordenador, 1);
+            
+            coordenador.setCurso(cursoDao.retornarPorNome(valorSelect));
+            
             pedidoDao.adicionar(p);
             usuarioDao.adicionar(usuario);
+            
             coordenadorDao.adicionar(coordenador);
             limparCampos();
             redirecionar();
         }
+    }
+    
+    public Regime[] regimes() {
+        return Regime.values();
+    }
+    
+    public Vinculo[] vinculos() {
+        return Vinculo.values();
+    }
+    
+    public Unidade[] unidades() {
+        return Unidade.values();
     }
     
     private void redirecionar() {
@@ -154,7 +189,6 @@ public class ControladorCadastro implements Serializable {
         try {
             externalContext.redirect("../index.xhtml");
         } catch (IOException ex) {
-            ex.printStackTrace();
         }
     }
 
@@ -163,12 +197,14 @@ public class ControladorCadastro implements Serializable {
         message.setSeverity(FacesMessage.SEVERITY_INFO);
         FacesContext.getCurrentInstance().addMessage("Cadastro", message);
     }
+    
 
     private void limparCampos() {
         nome = "";
         email = "";
         senha = "";
         coordenador = new Coordenador();
+        professor = new Professor();
     }
 
 }

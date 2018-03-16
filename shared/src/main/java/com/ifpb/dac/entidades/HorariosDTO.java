@@ -4,11 +4,16 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author rodrigobento
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class HorariosDTO implements Serializable {
     
     private String dia;

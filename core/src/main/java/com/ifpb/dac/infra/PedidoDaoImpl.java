@@ -1,7 +1,9 @@
 
 package com.ifpb.dac.infra;
 
+import com.ifpb.dac.entidades.Curso;
 import com.ifpb.dac.entidades.Pedido;
+import com.ifpb.dac.enums.TipoUsuario;
 import com.ifpb.dac.interfaces.PedidoDao;
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +47,14 @@ public class PedidoDaoImpl implements PedidoDao {
         return em.createQuery("SELECT p FROM Pedido p ORDER BY p.prioridade DESC", 
                 Pedido.class).getResultList();
     }
+    
+    @Override
+    public List<Pedido> listarPedidosPorTipoUsuario(TipoUsuario tipo) {
+        TypedQuery<Pedido> createQuery = em.createQuery("SELECT p FROM Pedido p "
+                + "WHERE p.tipo =:tipoUsuario ORDER BY p.prioridade DESC", Pedido.class);
+        createQuery.setParameter("tipoUsuario", tipo);
+        return createQuery.getResultList();
+    }
 
     @Override
     public Pedido buscarPorId(int id) {
@@ -64,5 +74,24 @@ public class PedidoDaoImpl implements PedidoDao {
             return null;
         }
    }
+
+    @Override
+    public List<Pedido> listarPedidosAlunosPorCurso(Curso curso) {
+        TypedQuery<Pedido> createQuery = em.createQuery("SELECT p FROM Pedido p, Aluno a"
+                + " WHERE p.tipo = Aluno AND a.email = p.email AND a.curso = :curso ORDER BY"
+                + " p.prioridade DESC", Pedido.class);
+        createQuery.setParameter("curso", curso);
+        return createQuery.getResultList();
+    }
+
+    @Override
+    public List<Pedido> listarPedidosPorCurso(Curso curso) {
+        TypedQuery<Pedido> createQuery = em.createQuery("SELECT p FROM Pedido p, Aluno a, Professor r"
+                + " WHERE p.tipo <> Coordenador AND a.email = p.email AND a.curso = :curso ORDER BY"
+                + "AND AND r.email = p.email AND r.curso = :curso ORDER BY"
+                + " p.prioridade DESC", Pedido.class);
+        createQuery.setParameter("curso", curso);
+        return createQuery.getResultList();
+    }
     
 }

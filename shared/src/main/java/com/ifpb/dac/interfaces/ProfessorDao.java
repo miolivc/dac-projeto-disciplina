@@ -1,6 +1,7 @@
 
 package com.ifpb.dac.interfaces;
 
+import com.ifpb.dac.entidades.PerfilProfessor;
 import com.ifpb.dac.entidades.Professor;
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface ProfessorDao {
     Professor buscarPorNome(String nomeProfessor);
     Professor autentica(String email, String senha);
     boolean verificarEmail(String email);
+    List<PerfilProfessor> todosOsPerfisProfessores();
 }
