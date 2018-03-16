@@ -3,8 +3,8 @@ package com.ifpb.dac.resources;
 
 import com.ifpb.dac.interfaces.TurmaDao;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -17,9 +17,8 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class TurmaResource {
     
-    @Inject
+    @EJB
     private TurmaDao turmaDao;
-    
     
     @GET
     public Response todasAsTurmas() {
@@ -27,7 +26,9 @@ public class TurmaResource {
         if (turmas == null || turmas.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok().entity(turmas).build();
+//        GenericEntity answer = new GenericEntity<List<String>>(turmas){};
+//        return Response.ok().entity(answer).build();
+        return Response.ok(turmas).build();
     }
     
     @GET
@@ -37,7 +38,9 @@ public class TurmaResource {
         if (professores == null || professores.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok().entity(professores).build();
+//        GenericEntity answer = new GenericEntity<List<String>>(professores){};
+//        return Response.ok().entity(answer).build();
+        return Response.ok(professores).build();
     }
     
     @GET
@@ -47,7 +50,9 @@ public class TurmaResource {
         if (disciplinas == null || disciplinas.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok().entity(disciplinas).build();
+//        GenericEntity answer = new GenericEntity<List<String>>(disciplinas){};
+//        return Response.ok().entity(answer).build();
+        return Response.ok(disciplinas).build();
     }
     
 }

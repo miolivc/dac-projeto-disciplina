@@ -4,11 +4,12 @@ package com.ifpb.dac.resources;
 import com.ifpb.dac.interfaces.LaboratorioDao;
 import com.ifpb.dac.interfaces.SalaDao;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -17,10 +18,9 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class SalaResource {
     
-    @Inject
+    @EJB
     private SalaDao salaDao;
-    
-    @Inject
+    @EJB
     private LaboratorioDao laboratorioDao; 
     
     @GET
@@ -31,7 +31,8 @@ public class SalaResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         
-        return Response.ok().entity(salas).build();
+        GenericEntity answer = new GenericEntity<List<String>>(salas){};
+        return Response.ok().entity(answer).build();
     }
     
     
@@ -43,7 +44,8 @@ public class SalaResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         
-        return Response.ok().entity(labs).build();
+        GenericEntity answer = new GenericEntity<List<String>>(labs){};
+        return Response.ok().entity(answer).build();
     }
     
 }

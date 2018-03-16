@@ -3,11 +3,12 @@ package com.ifpb.dac.resources;
 
 import com.ifpb.dac.interfaces.CursoDao;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -16,7 +17,7 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class CursoResource {
     
-    @Inject
+    @EJB
     private CursoDao cursoDao;
     
     @GET
@@ -25,8 +26,8 @@ public class CursoResource {
         if (nomeCursos == null || nomeCursos.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        
-        return Response.ok().entity(nomeCursos).build();
+        GenericEntity answer = new GenericEntity<List<String>>(nomeCursos){};
+        return Response.ok().entity(answer).build();
     }
     
 }

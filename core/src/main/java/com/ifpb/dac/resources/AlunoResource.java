@@ -5,8 +5,8 @@ import com.ifpb.dac.entidades.Aluno;
 import com.ifpb.dac.entidades.Pedido;
 import com.ifpb.dac.interfaces.AlunoDao;
 import com.ifpb.dac.interfaces.PedidoDao;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -16,9 +16,9 @@ import javax.ws.rs.core.Response;
 @Path("aluno")
 public class AlunoResource {
     
-    @Inject
+    @EJB
     private AlunoDao alunoDao;
-    @Inject
+    @EJB
     private PedidoDao pedidoDao;
     
     @POST

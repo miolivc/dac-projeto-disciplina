@@ -3,16 +3,15 @@ package com.ifpb.dac.resources;
 
 import com.ifpb.dac.entidades.HorariosDTO;
 import com.ifpb.dac.interfaces.HorariosDao;
-import com.ifpb.dac.interfaces.LaboratorioDao;
-import com.ifpb.dac.interfaces.ProfessorDao;
 import com.ifpb.dac.interfaces.SalaDao;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -21,9 +20,9 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class HorariosResource {
     
-    @Inject
+    @EJB
     private SalaDao salaDao;
-    @Inject
+    @EJB
     private HorariosDao horariosDao;
     
     @GET
@@ -39,7 +38,8 @@ public class HorariosResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         
-        return Response.ok().entity(horarios).build();
+        GenericEntity answer = new GenericEntity<List<HorariosDTO>>(horarios){};
+        return Response.ok().entity(answer).build();
     }
     
     @GET
@@ -55,7 +55,8 @@ public class HorariosResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         } 
         
-        return Response.ok().entity(horarios).build();
+        GenericEntity answer = new GenericEntity<List<HorariosDTO>>(horarios){};
+        return Response.ok().entity(answer).build();
     }
     
     @GET
@@ -71,7 +72,8 @@ public class HorariosResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         
-        return Response.ok().entity(horarios).build();
+        GenericEntity answer = new GenericEntity(horarios){};
+        return Response.ok().entity(answer).build();
     }
     
     @GET
@@ -88,7 +90,8 @@ public class HorariosResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         
-        return Response.ok().entity(horarios).build();
+        GenericEntity answer = new GenericEntity<List<HorariosDTO>>(horarios){};
+        return Response.ok().entity(answer).build();
     }
     
     @GET
@@ -105,7 +108,8 @@ public class HorariosResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         
-        return Response.ok().entity(horarios).build();
+        GenericEntity answer = new GenericEntity<List<HorariosDTO>>(horarios){};
+        return Response.ok().entity(answer).build();
     }
     
 }
