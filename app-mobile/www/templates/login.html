@@ -1,4 +1,4 @@
-<ion-view title="Login" id="login">
+<ion-view title="Login" id="login" ng-controller="loginCtrl">
   <ion-content padding="true" class="has-header">
     <div class="spacer" style="width: 300px; height: 31px;"></div>
     <div>
@@ -8,13 +8,13 @@
       <div class="spacer" style="width: 300px; height: 46px;"></div>
       <label class="item item-input" id="login-input1">
         <span class="input-label">Login</span>
-        <input type="text" placeholder="" name="login">
+        <input type="text" placeholder="" name="login" ng-model="login.matricula">
       </label>
       <label class="item item-input" id="login-input2">
         <span class="input-label">Senha</span>
-        <input type="password" placeholder="" name="senha">
+        <input type="password" placeholder="" name="senha" ng-model="login.senha">
       </label>
     </form>
-    <a id="login-button1" href="#/app/horarios" class="button button-assertive button-block">Entrar</a>
+    <a id="login-button1" ng-click="loginUsuario(login)" class="button button-assertive button-block">Entrar</a>
   </ion-content>
 </ion-view>

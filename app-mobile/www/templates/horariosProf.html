@@ -1,0 +1,17 @@
+<ion-view view-title="Horario dos Professores" id="horariosProf" ng-controller= "horarioProfCtrl">
+	<ion-content>
+		<div class="spacer" style="width: 300px; height: 31px;"></div>
+		<div class="list">
+			<label class="item item-input item-select">
+				<div class="input-label">
+					Nome
+				</div>
+				<select>
+					<option ng-repeat="item in prof">item.nome</option>
+				</select>
+			</label>
+		</div>
+		<div class="spacer" style="width: 300px; height: 31px;"></div>
+		<a id="login-button1" href="#/app/horarios" class="button button-balanced button-block">Buscar <i class="ion-search"></i></a>
+	</ion-content>
+</ion-view>

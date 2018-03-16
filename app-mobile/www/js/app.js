@@ -48,7 +48,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
-    //controller: 'loginCtrl'
+    controller: 'loginCtrl'
   })
 
   //horarios
@@ -57,21 +57,66 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     views: {
       'menuContent': {
         templateUrl: 'templates/horarios.html',
-        controller: 'HorariosCtrl'
+        controller:  'horariosCtrl'
       }
     }
   })
 
-  //horarios
-  .state('app.horario', {
-    url: '/verhorario/:id',
+  //horarios dos professores
+  .state('app.horariosProf', {
+    url: '/horariosProf',
     views: {
       'menuContent': {
-        templateUrl: 'templates/verHorario.html',
-        controller: 'VerHorarioCtrl'
+        templateUrl: 'templates/horariosProf.html',
+        controller: 'horarioProfCtrl'
       }
     }
   })
+
+  //horarios das turmas
+  .state('app.horariosTurmas', {
+    url: '/horariosTurmas',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/horariosTurmas.html',
+        controller: 'horarioTurmasCtrl'
+      }
+    }
+  })
+
+//horarios das salas
+  .state('app.horariosSalas', {
+    url: '/horariosSalas',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/horariosSalas.html',
+        controller: 'horarioSalasCtrl'
+      }
+    }
+  })
+
+  //horarios dos lab
+  .state('app.horariosLabs', {
+    url: '/horariosLabs',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/horariosLabs.html',
+        controller: 'horarioLabsCtrl'
+      }
+    }
+  })
+
+  //horarios dos cursos
+  .state('app.horariosCursos', {
+    url: '/horariosCursos',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/horariosCursos.html',
+        controller: 'horarioCursosCtrl'
+      }
+    }
+  })
+
 
   // rota iniciar
   $urlRouterProvider.otherwise('/login');
