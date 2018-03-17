@@ -6,6 +6,7 @@ import com.ifpb.dac.entidades.Pedido;
 import com.ifpb.dac.interfaces.AlunoDao;
 import com.ifpb.dac.interfaces.PedidoDao;
 import com.ifpb.dac.resouces.security.BasicAuth;
+import java.io.UnsupportedEncodingException;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.FormParam;
@@ -25,7 +26,7 @@ public class AlunoResource {
     @POST
     @Path("authenticate")
     public Response authenticate(@FormParam("email") String email, 
-            @FormParam("password") String password) {
+            @FormParam("password") String password) throws UnsupportedEncodingException {
         
         if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST).build();
@@ -39,8 +40,8 @@ public class AlunoResource {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
         
-        String encode = BasicAuth.encode(email, password);
-        String answer = String.format("{'Authorization': %s}", encode);
+        String authorization = BasicAuth.encode(email, password);
+        String answer = "{'Authorization': '" + authorization + "'}";
         
         return Response.ok()
                 .entity(answer)

@@ -10,7 +10,7 @@ app.controller('horarioSalasCtrl', function($scope, $state, $stateParams,$window
 	//montando objeto
 	var req = {
 		method: 'GET',
-		url:'https://localhost:8082/core/api/sala'
+		url:'https://localhost:8082/core/api/local/sala'
 	}
 
 	$http(req).then(function(resp){

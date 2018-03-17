@@ -41,43 +41,39 @@
                     </div>
 
                     <div class="form-group">
-                        <h:selectOneMenu class="form-control col-md-12" value = "#{controladorUsuario.valorSelect}">
-                            <f:selectItems value="#{controladorUsuario.tiposUsuario}" 
+                        <h:selectOneMenu class="form-control col-md-12" value = "#{controladorUsuario.tipo}">
+                            <f:selectItems value="#{controladorUsuario.todosOsTiposUsuario()}" 
                                            var="tipo"
                                            itemLabel="#{tipo}"
                                            itemValue="#{tipo}"/>
                         </h:selectOneMenu>
                     </div>
                     <br></br>
-                    <h:commandButton class="btn btn-primary"
+                    <h:form>
+                        <h:commandButton class="btn btn-primary col-md-12"
                                      value="Login" 
                                      action="#{controladorUsuario.realizarLogin()}"/>
-                    <br></br>
-                    <h:form>
                         <h:commandButton class="btn btn-primary"
                                          immediate="true"
-                                         value="Realizar cadastro de aluno"
+                                         value="cadastro de Aluno"
                                          style="margin-left: 20px;"
                                          action="#{controladorUsuario.navegarCadastro()}"/>
-                    </h:form>
-                    <h:form>
+                    
                         <h:commandButton class="btn btn-primary"
                                          immediate="true"
-                                         value="Realizar cadastro de Coordenador"
+                                         value="Cadastro de Coordenador"
                                          style="margin-left: 20px;"
                                          action="#{controladorUsuario.navegarCadastroCoordenador()}"/>
-                    </h:form>
-                    <h:form>
+                        
                         <h:commandButton class="btn btn-primary"
                                          immediate="true"
-                                         value="Realizar cadastro de Professor"
+                                         value="Cadastro de Professor"
                                          style="margin-left: 20px;"
                                          action="#{controladorUsuario.navegarCadastroProfessor()}"/>
                     </h:form>
                 </h:form>
 
             </div> <!-- .row -->
-
 
             <br></br>
             <div class="row text-center">
@@ -86,7 +82,8 @@
                                      value="Entrar como publico" 
                                      action="#{controladorUsuario.entrarComoPublico()}"/>
                 </h:form>
-                <h:link style="margin-left: 10px;" outcome="admin/loginAdmin.xhtml" value="Entrar como administrador" />             
+                <h:link class="btn bt-primary" style="margin-left: 10px;" outcome="admin/loginAdmin.xhtml" 
+                        value="Entrar como administrador" />             
             </div>
         </div>
     </h:body>

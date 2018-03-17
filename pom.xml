@@ -9,7 +9,6 @@
         <module>shared</module>
         <module>core</module>
         <module>web</module>
-        <module>app-json</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

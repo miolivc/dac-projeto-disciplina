@@ -3,10 +3,12 @@ package com.ifpb.dac.controllers;
 
 import com.ifpb.dac.entidades.Aluno;
 import com.ifpb.dac.entidades.Curso;
+import com.ifpb.dac.entidades.Info;
 import com.ifpb.dac.entidades.Pedido;
 import com.ifpb.dac.entidades.Professor;
 import com.ifpb.dac.enums.TipoUsuario;
 import com.ifpb.dac.interfaces.AlunoDao;
+import com.ifpb.dac.interfaces.CursoDao;
 import com.ifpb.dac.interfaces.PedidoDao;
 import com.ifpb.dac.interfaces.ProfessorDao;
 import java.util.List;
@@ -27,15 +29,26 @@ public class ControladorCoordenador {
     private AlunoDao alunoDao;
     @Inject
     private ProfessorDao professorDao;
+    @Inject
+    private CursoDao cursoDao;
     
     private HttpSession session;
+    private Curso curso;
+    private Info cursoInfo;
     
     @PostConstruct
     public void init() {
-        session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().
-                getSession(false);
+        session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext()
+                .getSession(false);
+        this.curso = (Curso) session.getAttribute("curso");
     }
     
+    public String atualizarInfoCuso() {
+        cursoDao.atualizar(curso);
+        return null;
+    }
+     
     public List<Pedido> pedidos() {
         List<Pedido> pedidos = pedidoDao.listarPedidosPorTipoUsuario(TipoUsuario.Professor);
         pedidos.addAll(pedidoDao.listarPedidosPorCurso((Curso) session.getAttribute("curso")));
@@ -62,6 +75,14 @@ public class ControladorCoordenador {
             }
         } 
         return null;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
     
 }

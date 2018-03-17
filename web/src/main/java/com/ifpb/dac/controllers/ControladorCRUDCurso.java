@@ -18,7 +18,7 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class ControladorCRUDCurso implements Serializable {
-    
+
     @Inject
     private CursoDao cursoDao;
     @Inject
@@ -68,24 +68,24 @@ public class ControladorCRUDCurso implements Serializable {
     public void setAbreviacao(String abreviacao) {
         this.abreviacao = abreviacao;
     }
-    
-    public String cadastrar(){
+
+    public String cadastrar() {
         Info info = new Info(abreviacao, descricao);
         curso.setInfo(info);
         cursoDao.adicionar(curso);
         limparCampos();
         return null;
     }
-    
-    public String editar(Curso c){
+
+    public String editar(Curso c) {
         descricao = c.getInfo().getDescricao();
         abreviacao = c.getInfo().getAbreviacao();
         curso = c;
         editando = true;
         return null;
     }
-    
-    public String atualizar(){
+
+    public String atualizar() {
         Info info = new Info(abreviacao, descricao);
         curso.setInfo(info);
         cursoDao.atualizar(curso);
@@ -93,13 +93,13 @@ public class ControladorCRUDCurso implements Serializable {
         editando = false;
         return null;
     }
-    
-    public String remover(Curso c){
+
+    public String remover(Curso c) {
         cursoDao.remover(c);
         return null;
     }
-    
-    private void limparCampos(){
+
+    private void limparCampos() {
         curso = new Curso();
         abreviacao = null;
         descricao = null;

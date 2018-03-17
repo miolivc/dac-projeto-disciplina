@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>CRUD - CURSO</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script src="../bootstrap/js/jquery-3.2.1.min.js"/>
+        <script src="../bootstrap/js/bootstrap.js"/>
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.css"/>
+        <link rel="stylesheet" href="../css/style.css" />
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="row text-center">
+                <h3>Gerenciador de Cursos</h3>
+                <hr />
+            </div>
+            <div class="row">
+                <h:link outcome="menu.xhtml" class="btn btn-warning" value="Voltar"/>
+            </div>
+            
+            <div class="row text-center">
+                <h:form>
+                    
+                    <div class="form-group">
+                        <h:outputLabel class="text-left col-md-12" value="Unidade: " for="unidade">
+                            <h:inputText id="unidade"
+                                         value="#{controladorCoordenador.curso.unidade}"
+                                         maxlength="50"
+                                         class="form-control col-md-12"
+                                         required="true"
+                                         requiredMessage="Informe uma unidade para o curso"/>
+                        </h:outputLabel>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h:outputLabel value="Descricao: " class="text-left col-md-12" for="descricao" rendered="#{controladorCRUDCurso.editando eq false}">
+                            <h:inputText id="descricao"
+                                         value="#{controladorCoordenador.curso.info.descricao}"
+                                         maxlength="40"
+                                         class="form-control col-md-12"
+                                         required="true"
+                                         requiredMessage="Informe uma descricao para o curso"/>
+                        </h:outputLabel>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h:outputLabel value="Abreviacao " class="text-left col-md-12" for="abrev">
+                            <h:inputText id="abrev"
+                                         value="#{controladorCoordenador.curso.info.abreviacao}"
+                                         maxlength="15"
+                                         class="form-control col-md-12"
+                                         required="true"
+                                         requiredMessage="Informe uma abreviação para o curso"/>
+                        </h:outputLabel>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h:outputLabel value="Periodos: " class="text-left col-md-12" for="per">
+                            <h:inputText id="per"
+                                         class="form-control col-md-12"
+                                         value="#{controladorCoordenador.curso.periodo}"
+                                         required="true"
+                                         requiredMessage="Informe o numero total de periodos para o curso"/>
+                        </h:outputLabel>
+                    </div>
+                    
+                    <br></br>
+                    <h:commandButton value="Atualizar"
+                                     class="btn btn-primary col-md-12"
+                                     rendered="#{controladorCRUDCurso.editando}"
+                                     action="#{controladorCoordenador.atualizarInfoCuso()}"/>
+                    <br></br>
+                </h:form>
+            </div>
+            <br />
+        </div>
+    </body>
+</html>

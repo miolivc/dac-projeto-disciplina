@@ -1,6 +1,7 @@
 
 package com.ifpb.dac.resouces.security;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,10 +9,9 @@ import java.util.StringTokenizer;
 
 public class BasicAuth {
     
-    public static String encode(String email, String password) {
-        String model = "%s:%s";
-        byte[] encodeParam = String.format(model, email, password).getBytes();
-        byte[] encode = Base64.getEncoder().encode(encodeParam);
+    public static String encode(String email, String password) throws UnsupportedEncodingException {
+        byte[] encodeParam = (email + ":" + password).getBytes("UTF-8");
+        String encode = Base64.getEncoder().encodeToString(encodeParam);
         return "Basic " + encode;
     }
     

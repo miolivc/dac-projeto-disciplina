@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
  */
 @Named
 @RequestScoped
-public class  ControladorUsuario implements Serializable {
+public class ControladorUsuario implements Serializable {
 
     @Inject
     private UsuarioDao usuarioDao;
@@ -31,22 +31,121 @@ public class  ControladorUsuario implements Serializable {
     private ProfessorDao professorDao;
     @Inject
     private CoordenadorDao coordenadorDao;
-
+    private HttpSession sessao;
+    private TipoUsuario tipo;
     private String valorSelect;
     private boolean cad = false;
-    private List<String> tiposUsuario = Arrays.asList("Professor", "Aluno", "Coordenador");
-    private Professor professor = new Professor();
     private Usuario usuario = new Usuario();
-    private HttpSession sessao;
+    private Coordenador coordenador = new Coordenador();
 
-    private Coordenador coordenador;
-
-    public List<String> getTiposUsuario() {
-        return tiposUsuario;
+    public List<TipoUsuario> todosOsTiposUsuario() {
+        return Arrays.asList(TipoUsuario.Coordenador, TipoUsuario.Aluno, TipoUsuario.Professor);
     }
 
-    public void setTiposUsuario(List<String> palavras) {
-        this.tiposUsuario = palavras;
+    public String navegarCadastro() {
+        return "cadastros/cadastro.xhtml";
+    }
+
+    public String navegarCadastroCoordenador() {
+        return "cadastros/cadastroCoordenador.xhtml";
+    }
+
+    public String navegarCadastroProfessor() {
+        return "cadastros/cadastroProfessor.xhtml";
+    }
+
+    public Coordenador getCoordenador() {
+        return coordenador;
+    }
+
+    public void setCoordenador(Coordenador coordenador) {
+        this.coordenador = coordenador;
+    }
+
+    public String realizarLogin() {
+        if (tipo.equals(TipoUsuario.Professor)) {
+            return loginProfessor();
+        } else if (tipo.equals(TipoUsuario.Coordenador)) {
+            return loginCoordenador();
+        }
+        return loginAluno();
+    }
+
+    public String entrarComoPublico() {
+        iniciarSessao();
+        sessao.setAttribute("credenciais", "publico");
+        return "principal.xhtml";
+    }
+
+    private void iniciarSessao() {
+        sessao = (HttpSession) FacesContext.getCurrentInstance().
+                getExternalContext().getSession(true);
+    }
+
+    private void atualizarPedido(String email, String senha) {
+        Pedido p = pedidoDao.buscarPorCredenciais(email, senha);
+        int incrementoPrioridade = p.getPrioridade() + 1;
+        p.setPrioridade(incrementoPrioridade);
+        pedidoDao.atualizar(p);
+        mostrarMensagem("Enviado pedido de acesso para o administrador");
+    }
+
+    public void mostrarMensagem(String msg) {
+        FacesMessage message = new FacesMessage(msg);
+        message.setSeverity(FacesMessage.SEVERITY_INFO);
+        FacesContext.getCurrentInstance().addMessage("Acesso", message);
+    }
+
+    private String loginCoordenador() {
+        Coordenador autenticado = coordenadorDao.autentica(usuario.getEmail(), usuario.getSenha());
+        usuario = new Usuario();
+        if (autenticado == null) {
+            mostrarMensagem("Email e senha invalidos!");
+            return null;
+        }
+        if (autenticado.isLogado()) {
+            iniciarSessao();
+            sessao.setAttribute("coordenador", autenticado);
+            sessao.setAttribute("credenciais", "coord");
+            sessao.setAttribute("curso", coordenador.getCurso());
+            return "principal.xhtml";
+        }
+        atualizarPedido(autenticado.getEmail(), autenticado.getSenha());
+        return null;
+    }
+
+    public String loginProfessor() {
+        Professor autenticado = professorDao.autentica(usuario.getEmail(), usuario.getSenha());
+        usuario = new Usuario();
+        if (autenticado == null) {
+            mostrarMensagem("Email e senha invalidos!");
+            return null;
+        }
+        if (autenticado.isLogado()) {
+            iniciarSessao();
+            sessao.setAttribute("usuario", autenticado);
+            sessao.setAttribute("credenciais", "prof");
+            return "principal.xhtml";
+        }
+        atualizarPedido(autenticado.getEmail(), autenticado.getSenha());
+        return null;
+    }
+
+    private String loginAluno() {
+        Aluno autenticado = alunoDao.autentica(usuario.getEmail(), usuario.getSenha());
+        usuario = new Usuario();
+        if (autenticado == null) {
+            mostrarMensagem("Email e senha invalidos!");
+            return null;
+        }
+        if (autenticado.isLogado()) {
+            iniciarSessao();
+            sessao.setAttribute("aluno", autenticado);
+            sessao.setAttribute("credenciais", "aluno");
+            return "principal.xhtml";
+        }
+        atualizarPedido(autenticado.getEmail(), autenticado.getSenha());
+        return null;
     }
 
     public String getValorSelect() {
@@ -72,110 +171,13 @@ public class  ControladorUsuario implements Serializable {
     public void setCad(boolean cad) {
         this.cad = cad;
     }
-    
-    public String navegarCadastro() {
-        return "cadastros/cadastro.xhtml";
+
+    public TipoUsuario getTipo() {
+        return tipo;
     }
 
-    public String navegarCadastroCoordenador() {
-        return "cadastros/cadastroCoordenador.xhtml";
-    }
-    
-    public String navegarCadastroProfessor() {
-        return "cadastros/cadastroProfessor.xhtml";
-    }
-    
-    public Coordenador getCoordenador() {
-        return coordenador;
-    }
-
-    public void setCoordenador(Coordenador coordenador) {
-        this.coordenador = coordenador;
-    }
-
-    public String realizarLogin() {
-        TipoUsuario tipo = Enum.valueOf(TipoUsuario.class, valorSelect);
-        // Caso seja login de professor
-        if (tipo.equals(TipoUsuario.Professor)) {
-            Professor autentica = professorDao.autentica(usuario.getEmail(), usuario.getSenha());
-            usuario = new Usuario();
-            if (autentica != null) {
-                if (autentica.isLogado()) {
-                    iniciarSessao();
-                    sessao.setAttribute("usuario", autentica);
-                    sessao.setAttribute("credenciais", "prof");
-                    return "principal.xhtml";
-                } else {
-                    atualizarPedido(autentica.getEmail(), autentica.getSenha());
-                    return null;
-                }
-            } else {
-                mostrarMensagem("Email e senha invalidos!");
-                return null;
-            }
-        } else if(tipo.equals(TipoUsuario.Coordenador)) {
-            Coordenador autenticado = coordenadorDao.autentica(usuario.getEmail(),
-                    usuario.getSenha());
-            usuario = new Usuario();
-            if (autenticado == null) {
-                mostrarMensagem("Email e senha invalidos!");
-                return null;
-            } else {
-                if (autenticado.isLogado()) {
-                    iniciarSessao();
-                    sessao.setAttribute("coordenador", autenticado);
-                    sessao.setAttribute("credenciais", "coord");
-                    sessao.setAttribute("curso", coordenador.getCurso());
-                    return "principal.xhtml";
-                } else {
-                    atualizarPedido(autenticado.getEmail(), autenticado.getSenha());
-                    return null;
-                }
-            }
-        } else if(tipo.equals(TipoUsuario.Aluno)) {
-            Aluno autenticado = alunoDao.autentica(usuario.getEmail(),
-                    usuario.getSenha());
-            usuario = new Usuario();
-            if (autenticado == null) {
-                mostrarMensagem("Email e senha invalidos!");
-                return null;
-            } else {
-                if (autenticado.isLogado()) {
-                    iniciarSessao();
-                    sessao.setAttribute("aluno", autenticado);
-                    sessao.setAttribute("credenciais", "aluno");
-                    return "principal.xhtml";
-                } else {
-                    atualizarPedido(autenticado.getEmail(), autenticado.getSenha());
-                }
-            }
-        }
-        return null;
-    }
-
-    public String entrarComoPublico() {
-        iniciarSessao();
-        sessao.setAttribute("credenciais", "publico");
-        return "principal.xhtml";
-    }
-
-    public void mostrarMensagem(String msg) {
-        FacesMessage message = new FacesMessage(msg);
-        message.setSeverity(FacesMessage.SEVERITY_INFO);
-        FacesContext.getCurrentInstance().addMessage("Acesso", message);
-    }
-
-    private void iniciarSessao() {
-        sessao = (HttpSession) FacesContext.getCurrentInstance().
-                getExternalContext().getSession(true);
-    }
-
-    private void atualizarPedido(String email, String senha) {
-        Pedido p = pedidoDao.buscarPorCredenciais(email, senha);
-        int incrementoPrioridade = p.getPrioridade() + 1;
-        p.setPrioridade(incrementoPrioridade);
-        pedidoDao.atualizar(p);
-        mostrarMensagem("Enviado pedido de acesso para o administrador");
+    public void setTipo(TipoUsuario tipo) {
+        this.tipo = tipo;
     }
 
 }

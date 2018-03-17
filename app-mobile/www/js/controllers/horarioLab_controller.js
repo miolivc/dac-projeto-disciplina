@@ -10,7 +10,7 @@ app.controller('horarioLabsCtrl', function($scope, $state, $stateParams,$window,
 	//montando objeto
 	var req = {
 		method: 'GET',
-		url:'https://localhost:8082/core/api/laboratorio'
+		url:'https://localhost:8082/core/api/local/laboratorio'
 	}
 
 	$http(req).then(function(resp){

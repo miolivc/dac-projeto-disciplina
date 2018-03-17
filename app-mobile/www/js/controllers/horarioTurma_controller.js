@@ -8,10 +8,11 @@ app.controller('horarioTurmasCtrl', function($scope, $state, $stateParams,$windo
 	});
 
 	//montando objeto
+	localStorage.getItem("Authorization");
 	var req = {
 		method: 'GET',
 		url:'https://localhost:8082/core/api/turma'
-	}
+	};
 
 	$http(req).then(function(resp){
 		
