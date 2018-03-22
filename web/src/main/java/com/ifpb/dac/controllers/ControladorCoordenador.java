@@ -41,6 +41,9 @@ public class ControladorCoordenador {
         session = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext()
                 .getSession(false);
+    }
+
+    public ControladorCoordenador() {
         this.curso = (Curso) session.getAttribute("curso");
     }
     
@@ -50,8 +53,7 @@ public class ControladorCoordenador {
     }
      
     public List<Pedido> pedidos() {
-        List<Pedido> pedidos = pedidoDao.listarPedidosPorTipoUsuario(TipoUsuario.Professor);
-        pedidos.addAll(pedidoDao.listarPedidosPorCurso((Curso) session.getAttribute("curso")));
+        List<Pedido> pedidos = pedidoDao.listarPedidosPorCurso(curso);
         return pedidos;
     }
     
