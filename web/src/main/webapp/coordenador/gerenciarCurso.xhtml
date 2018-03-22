@@ -19,7 +19,11 @@
                 <hr />
             </div>
             <div class="row">
-                <h:link outcome="../principal.xhtml" class="btn btn-warning" value="Voltar"/>
+                
+            </div>
+            
+            <div class="row text-center">
+                <h:outputLabel value="#{controladorCoordenador.curso.info.descricao}"/>
             </div>
             
             <div class="row text-center">
@@ -71,7 +75,7 @@
                     <br></br>
                     <h:commandButton value="Atualizar"
                                      class="btn btn-primary col-md-12"
-                                     action="#{controladorCoordenador.atualizarInfoCuso()}"/>
+                                     action="#{controladorCoordenador.atualizarInfoCurso()}"/>
                     <br></br>
                 </h:form>
             </div>

@@ -87,6 +87,7 @@ CREATE TABLE pedido(
 
 INSERT INTO usuario VALUES (1, 'admin', 'admin@gmail.com', 'admin123', 'Administrador', true);
 INSERT INTO laboratorio (codigo_lab, abreviacao, descricao) VALUES(36, 'X', 'X');
-INSERT INTO sala(codigo_sala, abreviacao, descricao) VALUES(37, 'X', 'X')
+INSERT INTO sala(codigo_sala, abreviacao, descricao) VALUES(37, 'X', 'X');
+
 
 /*DROP TABLE disciplina, sala, laboratorio, horario, aula, turma, professor, curso, usuario, pedido;*/
