@@ -41,9 +41,6 @@ public class ControladorCoordenador {
         session = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext()
                 .getSession(false);
-    }
-
-    public ControladorCoordenador() {
         this.curso = (Curso) session.getAttribute("curso");
     }
     
