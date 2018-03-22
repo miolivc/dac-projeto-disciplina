@@ -1,10 +1,7 @@
 package com.ifpb.dac.infra;
 
-import com.ifpb.dac.entidades.Aluno;
 import com.ifpb.dac.entidades.Coordenador;
-import com.ifpb.dac.interfaces.AlunoDao;
 import com.ifpb.dac.interfaces.CoordenadorDao;
-
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

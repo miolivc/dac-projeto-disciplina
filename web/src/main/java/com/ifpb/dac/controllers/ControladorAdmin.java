@@ -77,27 +77,28 @@ public class ControladorAdmin implements Serializable {
     }
 
     public String liberarAcesso(Pedido p) {
-        if (p.getTipoUsuario().equals(TipoUsuario.Aluno)) {
-
-            Aluno alunoLib = alunoDao.autentica(p.getEmail(), p.getSenha());
-            if (alunoLib != null) {
-                alunoLib.setLogado(true);
-                alunoDao.atualizar(alunoLib);
-                pedidoDao.remover(p);
-            }
-
-        } else if (p.getTipoUsuario().equals(TipoUsuario.Professor)) {
-
-            Professor prof = professorDao.autentica(p.getEmail(), p.getSenha());
-//            Usuario usuLiberado = usuarioDao.autentica(p.getEmail(), p.getSenha(),
-//                    p.getTipo());
-            if (prof != null) {
-                prof.setLogado(true);
-                professorDao.atualizar(prof);
-                pedidoDao.remover(p);
-            }
-
-        } else if (p.getTipoUsuario().equals(TipoUsuario.Coordenador)) {
+//        if (p.getTipoUsuario().equals(TipoUsuario.Aluno)) {
+//
+//            Aluno alunoLib = alunoDao.autentica(p.getEmail(), p.getSenha());
+//            if (alunoLib != null) {
+//                alunoLib.setLogado(true);
+//                alunoDao.atualizar(alunoLib);
+//                pedidoDao.remover(p);
+//            }
+//
+//        } else if (p.getTipoUsuario().equals(TipoUsuario.Professor)) {
+//
+//            Professor prof = professorDao.autentica(p.getEmail(), p.getSenha());
+////            Usuario usuLiberado = usuarioDao.autentica(p.getEmail(), p.getSenha(),
+////                    p.getTipo());
+//            if (prof != null) {
+//                prof.setLogado(true);
+//                professorDao.atualizar(prof);
+//                pedidoDao.remover(p);
+//            }
+//
+//        } else 
+            if (p.getTipoUsuario().equals(TipoUsuario.Coordenador)) {
 
             Coordenador coord = coordenadorDao.autentica(p.getEmail(), p.getSenha());
             if (coord != null) {
