@@ -16,9 +16,7 @@ public class ConFactory {
         try {
             Class.forName("org.postgresql.Driver");
             return DriverManager.getConnection(URLBANCO, USUARIO, SENHA);
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }
         return null;
