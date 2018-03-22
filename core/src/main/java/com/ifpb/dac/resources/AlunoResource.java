@@ -5,7 +5,7 @@ import com.ifpb.dac.entidades.Aluno;
 import com.ifpb.dac.entidades.Pedido;
 import com.ifpb.dac.interfaces.AlunoDao;
 import com.ifpb.dac.interfaces.PedidoDao;
-import com.ifpb.dac.resouces.security.BasicAuth;
+import com.ifpb.dac.resources.security.BasicAuth;
 import java.io.UnsupportedEncodingException;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -41,7 +41,7 @@ public class AlunoResource {
         }
         
         String authorization = BasicAuth.encode(email, password);
-        String answer = "{'Authorization': '" + authorization + "'}";
+        String answer = "{'Authorization': " + authorization + "}";
         
         return Response.ok()
                 .entity(answer)
