@@ -50,7 +50,7 @@ public class ControladorCoordenador {
     }
      
     public List<Pedido> pedidos() {
-        List<Pedido> pedidos = pedidoDao.listarTodos();
+        List<Pedido> pedidos = pedidoDao.listarPedidosPorCurso(curso);
         return pedidos;
     }
     
