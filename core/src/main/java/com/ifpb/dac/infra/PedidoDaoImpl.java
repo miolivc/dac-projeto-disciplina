@@ -87,7 +87,7 @@ public class PedidoDaoImpl implements PedidoDao {
     @Override
     public List<Pedido> listarPedidosPorCurso(Curso curso) {
         String sql = "SELECT new com.ifpb.dac.entidades.Pedido(p.nome, p.email, p.senha, p.tipoUsuario, p.prioridade)"
-            + "FROM (Pedido p JOIN Aluno a JOIN Professor f) c WHERE c.curso =:curso";
+            + "FROM Pedido p JOIN Aluno a JOIN Professor f WHERE a.curso =:curso AND f.curso := curso";
         TypedQuery<Pedido> createQuery = em.createQuery(sql, Pedido.class);
         createQuery.setParameter("curso", curso);
         return createQuery.getResultList();

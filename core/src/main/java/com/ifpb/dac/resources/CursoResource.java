@@ -29,8 +29,9 @@ public class CursoResource {
         }
         JsonArray collect = nomeCursos.stream()
                 .collect(Collector.of(Json::createArrayBuilder, 
-                        (t,u) -> t.add(u), 
-                        (x, y) -> x.add(y)))
+                        (t, u) -> t.add(u), 
+                        (x, y) -> x.add(y))
+                )
                 .build();
         return Response.ok().entity(collect).build();
     }
