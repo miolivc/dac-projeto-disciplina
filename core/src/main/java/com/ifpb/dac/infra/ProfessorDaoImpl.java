@@ -91,8 +91,8 @@ public class ProfessorDaoImpl implements ProfessorDao {
     @Override
     public List<PerfilProfessor> todosOsPerfisProfessores() {
         TypedQuery<PerfilProfessor> createQuery = 
-                em.createQuery("SELECT p.codigo, p.nome, p.email FROM Professor p", 
-                        PerfilProfessor.class);
+            em.createQuery("SELECT new com.ifpb.dac.entidades.PerfilProfessor(p.codigo, p.nome, p.email) "
+                + "FROM Professor p", PerfilProfessor.class);
         List<PerfilProfessor> resultList = createQuery.getResultList();
         return resultList;
     }
