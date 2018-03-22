@@ -97,9 +97,10 @@ public class HorariosResource {
     }
     
     @GET
-    @Path("turma")
+    @Path("turma/{disciplina}&{professor}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response horariosPorTurma(String disciplina, String professor) {
+    public Response horariosPorTurma(@PathParam("disciplina") String disciplina, 
+            @PathParam("professor") String professor) {
         
         if (professor == null || professor.isEmpty() || disciplina == null || disciplina.isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST).build();
