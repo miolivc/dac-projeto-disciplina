@@ -7,6 +7,8 @@ import com.ifpb.dac.interfaces.SalaDao;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -95,9 +97,9 @@ public class HorariosResource {
     }
     
     @GET
-    @Path("turma/{professor}&{disciplina}")
-    public Response horariosPorTurma(@PathParam("disciplina") String disciplina,
-            @PathParam("professor") String professor) {
+    @Path("turma")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response horariosPorTurma(String disciplina, String professor) {
         
         if (professor == null || professor.isEmpty() || disciplina == null || disciplina.isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST).build();

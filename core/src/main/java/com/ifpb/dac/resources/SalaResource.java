@@ -31,7 +31,7 @@ public class SalaResource {
     public Response todasAsSalas() {
         List<String> salas = salaDao.listarNomeSalas();
         if (salas == null || salas.isEmpty()) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NO_CONTENT).build();
         }
         JsonArray collect = salas.stream()
                 .collect(Collector.of(Json::createArrayBuilder, 

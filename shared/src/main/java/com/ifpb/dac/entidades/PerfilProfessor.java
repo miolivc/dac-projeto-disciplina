@@ -9,11 +9,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PerfilProfessor {
     
-    private String codigo;
+    private int codigo;
     private String nome;
     private String email;
 
-    public PerfilProfessor(String codigo, String nome, String email) {
+    public PerfilProfessor(int codigo, String nome, String email) {
         this.codigo = codigo;
         this.nome = nome;
         this.email = email;
@@ -22,11 +22,11 @@ public class PerfilProfessor {
     public PerfilProfessor() {
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 

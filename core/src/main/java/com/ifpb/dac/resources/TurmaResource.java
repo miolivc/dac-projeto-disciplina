@@ -27,14 +27,14 @@ public class TurmaResource {
     public Response todasAsTurmas() {
         List<String> turmas = turmaDao.listarTodasDisciplinas();
         if (turmas == null || turmas.isEmpty()) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NO_CONTENT).build();
         }
         JsonArray collect = turmas.stream()
                 .collect(Collector.of(Json::createArrayBuilder, 
                         (t, u) -> t.add(u), 
                         (x, y) -> x.add(y)))
                 .build();
-        return Response.ok(turmas).build();
+        return Response.ok(collect).build();
     }
     
     @GET
@@ -42,14 +42,14 @@ public class TurmaResource {
     public Response todosOsProfessores(@PathParam("disciplina") String disciplina) {
         List<String> professores = turmaDao.professoresDisciplina(disciplina);
         if (professores == null || professores.isEmpty()) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NO_CONTENT).build();
         }
         JsonArray collect = professores.stream()
                 .collect(Collector.of(Json::createArrayBuilder, 
                         (t, u) -> t.add(u), 
                         (x, y) -> x.add(y)))
                 .build();
-        return Response.ok(professores).build();
+        return Response.ok(collect).build();
     }
     
     @GET
@@ -57,14 +57,14 @@ public class TurmaResource {
     public Response disciplinaProfessores(@PathParam("professor") String professor) {
         List<String> disciplinas = turmaDao.professoresDisciplina(professor);
         if (disciplinas == null || disciplinas.isEmpty()) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NO_CONTENT).build();
         }
       JsonArray collect = disciplinas.stream()
                 .collect(Collector.of(Json::createArrayBuilder, 
                         (t, u) -> t.add(u), 
                         (x, y) -> x.add(y)))
                 .build();
-        return Response.ok(disciplinas).build();
+        return Response.ok(collect).build();
     }
     
 }
