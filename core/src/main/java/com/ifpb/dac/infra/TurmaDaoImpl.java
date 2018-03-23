@@ -3,6 +3,7 @@ package com.ifpb.dac.infra;
 import com.ifpb.dac.entidades.Curso;
 import com.ifpb.dac.entidades.Turma;
 import com.ifpb.dac.interfaces.TurmaDao;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +20,7 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 @Remote(TurmaDao.class)
-public class TurmaDaoImpl implements TurmaDao {
+public class TurmaDaoImpl implements TurmaDao, Serializable {
 
     @PersistenceContext
     private EntityManager em;

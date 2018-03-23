@@ -16,7 +16,6 @@ import com.ifpb.dac.interfaces.PedidoDao;
 import com.ifpb.dac.interfaces.ProfessorDao;
 import com.ifpb.dac.interfaces.TurmaDao;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -98,19 +97,21 @@ public class ControladorCoordenador {
         
         for (Pedido pedido : pedidoDao.listarTodos()) {
             if (pedido.getTipoUsuario() == TipoUsuario.Aluno
-                    && alunoDao.buscarPorId(pedido.getId()).getCurso() == curso) {
+                    && alunoDao.buscarPorId(pedido.getId())
+                            .getCurso().getCodigo_curso() == curso.getCodigo_curso()) {
                 pedidos.add(pedido);
-                
-            } else if (pedido.getTipoUsuario() == TipoUsuario.Professor) {
+                continue;
+            } 
             
-                Professor sal = professorDao.buscarPorId(pedido.getId());
-                for (Turma c : curso.getTurmas()) {
-                    if (sal.getTurmas().contains(c)) {
+            if (pedido.getTipoUsuario() == TipoUsuario.Professor) {
+                List<Turma> t = professorDao.buscarPorId(pedido.getId()).getTurmas();
+                for (Turma tur : curso.getTurmas()) {
+                    if (t.contains(tur)) {
                         pedidos.add(pedido);
                         break;
                     }
                 }
-            } 
+            }
         }
         return pedidos;
 //        return pedidoDao.listarPedidosPorCurso(curso);
