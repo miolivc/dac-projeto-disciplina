@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <h:form>
-                    <h:commandLink action="../principal.xhtml" class="btn btn-warning" value="Voltar"/>
+                    <h:commandLink action="#{controladorMenu.voltar()}" class="btn btn-warning" value="Voltar"/>
                 </h:form>
             </div>
             
@@ -55,6 +55,7 @@
                         <h:outputLabel for="curso" class="text-left col-md-12" value="Curso: ">
                             <h:selectOneMenu id="curso" class="form-control"
                                              readonly="true"
+                                             rendered="#{controladorCRUDTurma.editando eq false}"
                                              value = "#{controladorCRUDTurma.valorCurso}">
                                 <f:selectItems value="#{controladorCRUDTurma.cursos}" 
                                                var="curso"
@@ -109,14 +110,19 @@
                             <h:outputText value="#{tur.professor.nome}"/>
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Ações</f:facet>
-                            <h:commandButton class="btn btn-default"
-                                action="#{controladorCRUDTurma.editar(tur)}"
-                                             value="Editar"/>
-                            <h:commandButton class="btn btn-default"
-                                             action="#{controladorCRUDTurma.remover(t)}"
-                                             value="Excluir"/>
-                        </h:column>
+                            <f:facet name="header">Editar</f:facet>
+                            <h:commandButton value="Editar" 
+                                             immediate="true"
+                                             class="btn btn-primary"
+                                             action="#{controladorCRUDTurma.editar(tur)}"/>
+                        </h:column> 
+                        <h:column>
+                            <f:facet name="header">Excluir</f:facet>
+                            <h:commandButton value="Excluir" 
+                                             immediate="true"
+                                             class="btn btn-danger"
+                                             action="#{controladorCRUDTurma.remover(d)}"/>
+                        </h:column> 
                     </h:dataTable>
                 </h:form>
             </div>

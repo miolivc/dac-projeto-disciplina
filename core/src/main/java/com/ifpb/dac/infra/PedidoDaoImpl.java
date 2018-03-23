@@ -77,13 +77,22 @@ public class PedidoDaoImpl implements PedidoDao {
 
     @Override
     public List<Pedido> listarPedidosPorCurso(Curso curso) {
-        String sql = "SELECT new com.ifpb.dac.entidades.Pedido(p.nome, p.email, p.senha, p.tipoUsuario, p.prioridade)"
-                + " FROM Pedido p JOIN Aluno a ON p.email = a.email JOIN Professor f ON p.email = f.email "
-                + "WHERE a.curso = :curso AND f.curso.turmas = ANY :turmas";
-        TypedQuery<Pedido> createQuery = em.createQuery(sql, Pedido.class);
-        createQuery.setParameter("curso", curso);
-        createQuery.setParameter("turmas", curso.getTurmas());
-        return createQuery.getResultList();
+//        String sql = "SELECT new com.ifpb.dac.entidades.Pedido(p.nome, p.email, p.senha, p.tipoUsuario, p.prioridade)"
+//                + " FROM Pedido p JOIN Aluno a ON p.email = a.email JOIN Professor f ON p.email = f.email "
+//                + "WHERE a.curso = :curso AND f.curso.turmas = ANY :turmas";
+        String sql = "SELECT p FROM Pedido p, Aluno a WHERE a.email = p.email AND a.curso = :curso ";
+        List<Pedido> alunos = em.createQuery(sql, Pedido.class)
+                .setParameter("curso", curso)
+                .getResultList();
+        
+        sql = "SELECT p FROM Pedido p, Professor a WHERE a.email = p.email AND p = ANY "
+                + "(SELECT j FROM PROFESSOR j WHERE j = :turmas.professor)";
+        List<Pedido> profs = em.createQuery(sql, Pedido.class)
+                .setParameter("turmas", curso.getTurmas())
+                .getResultList();
+        
+        alunos.addAll(profs);
+        return alunos;
     }
     
 }
