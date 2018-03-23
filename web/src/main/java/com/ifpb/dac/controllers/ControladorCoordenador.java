@@ -7,12 +7,14 @@ import com.ifpb.dac.entidades.Curso;
 import com.ifpb.dac.entidades.Disciplina;
 import com.ifpb.dac.entidades.Pedido;
 import com.ifpb.dac.entidades.Professor;
+import com.ifpb.dac.entidades.Turma;
 import com.ifpb.dac.enums.TipoUsuario;
 import com.ifpb.dac.interfaces.AlunoDao;
 import com.ifpb.dac.interfaces.CursoDao;
 import com.ifpb.dac.interfaces.DisciplinaDao;
 import com.ifpb.dac.interfaces.PedidoDao;
 import com.ifpb.dac.interfaces.ProfessorDao;
+import com.ifpb.dac.interfaces.TurmaDao;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -34,6 +36,8 @@ public class ControladorCoordenador {
     private ProfessorDao professorDao;
     @Inject
     private CursoDao cursoDao;
+    @Inject
+    private TurmaDao turmaDao;
     @Inject
     private DisciplinaDao disciplinas;
     
@@ -94,6 +98,10 @@ public class ControladorCoordenador {
     
     public List<Professor> professores() {
         return professorDao.listarTodos();
+    }
+    
+    public List<Turma> turmas() {
+        return turmaDao.listarTodos(curso);
     }
     
     public Curso getCurso() {

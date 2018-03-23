@@ -14,7 +14,9 @@
     <body>
         <div class="container">
             <div class="row">
-                <h:commandLink action="../principal.xhtml" class="btn btn-warning" value="Voltar"/>
+                <h:form>
+                    <h:commandLink action="../principal.xhtml" class="btn btn-warning" value="Voltar"/>
+                </h:form>
             </div>
             
             <br />
@@ -27,7 +29,7 @@
             <div class="row text-center">
                 <h:form>
                     <div class="form-group">
-                        <h:outputLabel value="Descricao: " class="text-left col-md-12" for="descricao"
+                        <h:outputLabel value="Descricao: " class="text-left col-md-12" for="descricao">
                             <h:inputText id="descricao"
                                          value="#{controladorCoordenador.disciplina.descricao}"
                                          required="true"
