@@ -54,7 +54,6 @@
                     <div class="form-group">
                         <h:outputLabel for="curso" class="text-left col-md-12" value="Curso: ">
                             <h:selectOneMenu id="curso" class="form-control"
-                                             readonly="true"
                                              rendered="#{controladorCRUDTurma.editando eq false}"
                                              value = "#{controladorCRUDTurma.valorCurso}">
                                 <f:selectItems value="#{controladorCRUDTurma.cursos}" 
@@ -121,7 +120,7 @@
                             <h:commandButton value="Excluir" 
                                              immediate="true"
                                              class="btn btn-danger"
-                                             action="#{controladorCRUDTurma.remover(d)}"/>
+                                             action="#{controladorCRUDTurma.remover(tur)}"/>
                         </h:column> 
                     </h:dataTable>
                 </h:form>
