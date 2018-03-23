@@ -14,9 +14,7 @@
     <body>
         <div class="container">
             <div class="row">
-                <h:form>
-                    <h:commandLink action="../principal.xhtml" class="btn btn-warning" value="Voltar"/>
-                </h:form>
+                <h:link outcome="../principal.xhtml" class="btn btn-warning" value="Voltar"/>
             </div>
             
             <br />
@@ -29,9 +27,10 @@
             <div class="row text-center">
                 <h:form>
                     <div class="form-group">
-                        <h:outputLabel value="Descricao: " class="text-left col-md-12" for="descricao">
+                        <h:outputLabel value="Descricao: " class="text-left col-md-12" for="descricao"
+                                       rendered="#{controladorCRUDDisc.editando eq false}">
                             <h:inputText id="descricao"
-                                         value="#{controladorCoordenador.disciplina.descricao}"
+                                         value="#{controladorCRUDDisc.disciplina.descricao}"
                                          required="true"
                                          class="form-control col-md-12"
                                          maxlength="40"
@@ -42,7 +41,7 @@
                     <div class="form-group">
                         <h:outputLabel value="Abreviacao " class="text-left col-md-12" for="abrev">
                             <h:inputText id="abrev"
-                                         value="#{controladorCoordenador.disciplina.abreviacao}"
+                                         value="#{controladorCRUDDisc.disciplina.abreviacao}"
                                          required="true"
                                          class="form-control col-md-12"
                                          maxlength="15"
@@ -53,7 +52,7 @@
                     <div class="form-group">
                         <h:outputLabel value="Aulas Semanais: " class="text-left col-md-12" for="as">
                             <h:inputText id="as"
-                                         value="#{controladorCoordenador.disciplina.aulas_semana}"
+                                         value="#{controladorCRUDDisc.disciplina.aulas_semana}"
                                          required="true"
                                          class="form-control col-md-12"
                                          requiredMessage="Informe o numero total de aulas para a disciplina"/>
@@ -63,24 +62,37 @@
                     <div class="form-group">
                         <h:outputLabel value="Carga Horaria: " class="text-left col-md-12" for="ch">
                             <h:inputText id="ch"
-                                         value="#{controladorCoordenador.disciplina.carga_horaria}"
+                                         value="#{controladorCRUDDisc.disciplina.carga_horaria}"
                                          class="form-control col-md-12"
                                          required="true"
                                          requiredMessage="Informe o numero a carga horaria da disciplina"/>
                         </h:outputLabel>
                     </div>
+                    
                     <div class="form-group">
-                        <h:inputHidden 
-                            value="#{controladorCoordenador.disciplina.curso = controladorCoordenador.curso}"/>
+                        <h:outputLabel rendered="#{controladorCRUDDisc.editando eq false}"
+                                       class="text-left col-md-12"
+                                       for="curso" value="Curso: ">
+                            <h:selectOneMenu class="form-control" id="curso" 
+                                             readonly="true"
+                                             value = "#{controladorCRUDDisc.valorSelect}">
+                                <f:selectItems value="#{controladorCRUDDisc.cursos}" 
+                                               var="crs"
+                                               itemLabel="#{crs}"
+                                               itemValue="#{crs}"/>
+                            </h:selectOneMenu>
+                        </h:outputLabel>
                     </div>
-                   
+                    
                     <br></br>
                     <h:commandButton value="Adicionar"
+                                     rendered="#{controladorCRUDDisc.editando eq false}"
                                      action="#{controladorCRUDDisc.cadastrar()}"
                                      class="btn btn-success col-md-12"/>
                     <h:commandButton value="Atualizar"
+                                     rendered="#{controladorCRUDDisc.editando}"
                                      class="btn btn-primary col-md-12"
-                                     action="#{controladorCoordenador.atualizardisciplina()}"/>
+                                     action="#{controladorCRUDDisc.atualizar()}"/>
                     <br></br>
                 </h:form>
             </div>
@@ -118,7 +130,7 @@
                             <h:commandButton value="Editar" 
                                              immediate="true"
                                              class="btn btn-primary"
-                                             action="#{controladorCoordenador.disciplina = d}"/>
+                                             action="#{controladorCRUDDisc.editar(d)}"/>
                         </h:column> 
                         <h:column>
                             <f:facet name="header">Excluir</f:facet>

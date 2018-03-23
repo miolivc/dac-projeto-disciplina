@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <h:form>
-                    <h:commandLink action="principal.xhtml" class="btn btn-warning" value="Voltar"/>
+                    <h:commandLink action="../principal.xhtml" class="btn btn-warning" value="Voltar"/>
                 </h:form>
             </div>
             
@@ -52,7 +52,16 @@
                     </div>
                     
                     <div class="form-group">
-                        <h:inputHidden value="#{controladorCRUDTurma.turma.curso = controladorCoordenador.curso}"/>
+                        <h:outputLabel for="curso" class="text-left col-md-12" value="Curso: ">
+                            <h:selectOneMenu id="curso" class="form-control"
+                                             readonly="true"
+                                             value = "#{controladorCRUDTurma.valorCurso}">
+                                <f:selectItems value="#{controladorCRUDTurma.cursos}" 
+                                               var="curso"
+                                               itemLabel="#{curso}"
+                                               itemValue="#{curso}"/>
+                            </h:selectOneMenu>
+                        </h:outputLabel>
                     </div>
                     
                     <div class="form-group">

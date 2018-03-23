@@ -2,7 +2,6 @@ package com.ifpb.dac.infra;
 
 import com.ifpb.dac.entidades.PerfilProfessor;
 import com.ifpb.dac.entidades.Professor;
-import com.ifpb.dac.enums.Unidade;
 import com.ifpb.dac.interfaces.ProfessorDao;
 import java.util.List;
 import java.util.Optional;
@@ -43,7 +42,7 @@ public class ProfessorDaoImpl implements ProfessorDao {
     }
     
     @Override
-    public List<Professor> listarTodos(Unidade unidade) {
+    public List<Professor> listarTodos(String unidade) {
         return em.createQuery("SELECT p FROM Professor p WHERE p.unidade =:unidade",Professor.class)
                 .setParameter("unidade", unidade)
                 .getResultList();
