@@ -145,6 +145,13 @@
                                              class="btn btn-primary"
                                              action="#{controladorCRUDProf.editarProfessor(p)}"/>
                         </h:column> 
+                        <h:column>
+                            <f:facet name="header">Remover</f:facet>
+                            <h:commandButton value="Editar" 
+                                             immediate="true"
+                                             class="btn btn-danger"
+                                             action="#{controladorCRUDProf.removerProfessor(prof)}"/>
+                        </h:column> 
                     </h:dataTable>
                 </h:form>
             </div>

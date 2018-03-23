@@ -36,7 +36,8 @@ public class TurmaDaoImpl implements TurmaDao {
 
     @Override
     public void remover(Turma turma) {
-        em.remove(turma);
+        Turma t = em.find(Turma.class, turma.getCodigo_turma());
+        em.remove(t);
     }
 
     @Override
