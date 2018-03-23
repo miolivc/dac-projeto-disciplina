@@ -52,7 +52,7 @@ public class ControladorTesteCRUD {
     private Laboratorio lab = new Laboratorio("TESTE", "TESTE");
     private Professor prof = new Professor();
     private Horario hora = new Horario("XXX", Calendar.getInstance(), Calendar.getInstance());
-    private Curso curso = new Curso(info, 9, "TESTE");
+    private Curso curso = new Curso(info, 9, Unidade.UNINFO);
     private Disciplina disc = new Disciplina("TESTE", "TESTE", 2, 5, curso);
     private Turma turma = new Turma("X", "XXX", curso, prof);
     private Aula aula = new Aula();
@@ -141,7 +141,7 @@ public class ControladorTesteCRUD {
     public String atualizarCurso(){
         curso.setCodigo_curso(10);
         curso.setPeriodo(999999999);
-        curso.setUnidade("999");
+        curso.setUnidade(Unidade.UFGP);
         cursoDao.atualizar(curso);
         return null;
     }

@@ -1,5 +1,6 @@
 package com.ifpb.dac.entidades;
 
+import com.ifpb.dac.enums.Unidade;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +33,8 @@ public class Curso implements Serializable {
     @Column(name = "periodo", nullable = false)
     private int periodo;
     @Column(name = "unidade", nullable = false, length = 50)
-    private String unidade;
+    @Enumerated(EnumType.STRING)
+    private Unidade unidade;
     @OneToMany(mappedBy = "curso", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Aula> aulas;
     @OneToMany(mappedBy = "curso", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
@@ -41,7 +45,7 @@ public class Curso implements Serializable {
         aulas = new ArrayList<>();
     }
 
-    public Curso(Info info, int periodo, String unidade) {
+    public Curso(Info info, int periodo, Unidade unidade) {
         this();
         this.info = info;
         this.periodo = periodo;
@@ -72,11 +76,11 @@ public class Curso implements Serializable {
         this.periodo = periodo;
     }
 
-    public String getUnidade() {
+    public Unidade getUnidade() {
         return unidade;
     }
 
-    public void setUnidade(String unidade) {
+    public void setUnidade(Unidade unidade) {
         this.unidade = unidade;
     }
 

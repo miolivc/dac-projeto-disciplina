@@ -108,6 +108,15 @@
                             <f:facet name="header">Professor</f:facet>
                             <h:outputText value="#{tur.professor.nome}"/>
                         </h:column>
+                        <h:column>
+                            <f:facet name="header">Ações</f:facet>
+                            <h:commandButton class="btn btn-default"
+                                action="#{controladorCRUDTurma.editar(tur)}"
+                                             value="Editar"/>
+                            <h:commandButton class="btn btn-default"
+                                             action="#{controladorCRUDTurma.remover(t)}"
+                                             value="Excluir"/>
+                        </h:column>
                     </h:dataTable>
                 </h:form>
             </div>

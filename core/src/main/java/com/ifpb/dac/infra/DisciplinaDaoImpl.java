@@ -24,8 +24,8 @@ public class DisciplinaDaoImpl implements DisciplinaDao {
 
     @Override
     public void remover(Disciplina disc) {
-        Disciplina aux = buscarPorId(disc.getCodigo_disc());
-        em.remove(aux);
+//        Disciplina aux = buscarPorId(disc.getCodigo_disc());
+        em.remove(disc);
     }
 
     @Override
