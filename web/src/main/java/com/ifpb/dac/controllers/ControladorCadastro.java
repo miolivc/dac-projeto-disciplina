@@ -11,7 +11,6 @@ import com.ifpb.dac.enums.TipoUsuario;
 import com.ifpb.dac.enums.Unidade;
 import com.ifpb.dac.enums.Vinculo;
 import com.ifpb.dac.interfaces.*;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;

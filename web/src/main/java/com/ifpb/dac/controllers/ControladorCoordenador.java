@@ -4,14 +4,16 @@ package com.ifpb.dac.controllers;
 import com.ifpb.dac.entidades.Aluno;
 import com.ifpb.dac.entidades.Coordenador;
 import com.ifpb.dac.entidades.Curso;
-import com.ifpb.dac.entidades.Info;
+import com.ifpb.dac.entidades.Disciplina;
 import com.ifpb.dac.entidades.Pedido;
 import com.ifpb.dac.entidades.Professor;
 import com.ifpb.dac.enums.TipoUsuario;
 import com.ifpb.dac.interfaces.AlunoDao;
 import com.ifpb.dac.interfaces.CursoDao;
+import com.ifpb.dac.interfaces.DisciplinaDao;
 import com.ifpb.dac.interfaces.PedidoDao;
 import com.ifpb.dac.interfaces.ProfessorDao;
+import java.util.Collections;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -32,10 +34,13 @@ public class ControladorCoordenador {
     private ProfessorDao professorDao;
     @Inject
     private CursoDao cursoDao;
+    @Inject
+    private DisciplinaDao disciplinas;
+    
+    private Disciplina disciplina = new Disciplina();
     private Coordenador coordenador;
     private HttpSession session;
     private Curso curso;
-    private Info cursoInfo;
     
     @PostConstruct
     public void init() {
@@ -49,14 +54,14 @@ public class ControladorCoordenador {
     
     public String atualizarInfoCurso() {
         cursoDao.atualizar(curso);
-        return null;
-    }
-     
-    public List<Pedido> pedidos() {
-        List<Pedido> pedidos = pedidoDao.listarPedidosPorCurso(curso);
-        return pedidos;
+        return "principal.xhtml";
     }
     
+    public String atualizardisciplina() {
+        disciplinas.atualizar(disciplina);
+        return null;
+    }
+
     public String liberarAcesso(Pedido p) {
         if (p.getTipoUsuario().equals(TipoUsuario.Aluno)) {
 
@@ -79,6 +84,18 @@ public class ControladorCoordenador {
         return null;
     }
 
+    public List<Disciplina> disciplinas() {
+        return Collections.unmodifiableList(disciplinas.listarTodos(curso));
+    }
+    
+    public List<Pedido> pedidos() {
+        return pedidoDao.listarPedidosPorCurso(curso);
+    }
+    
+    public List<Professor> professores() {
+        return professorDao.listarTodos();
+    }
+    
     public Curso getCurso() {
         return curso;
     }
@@ -94,7 +111,13 @@ public class ControladorCoordenador {
     public void setCoordenador(Coordenador coordenador) {
         this.coordenador = coordenador;
     }
-    
-    
-    
+
+    public Disciplina getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
+    }
+     
 }

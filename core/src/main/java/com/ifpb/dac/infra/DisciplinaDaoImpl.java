@@ -1,5 +1,6 @@
 package com.ifpb.dac.infra;
 
+import com.ifpb.dac.entidades.Curso;
 import com.ifpb.dac.entidades.Disciplina;
 import com.ifpb.dac.interfaces.DisciplinaDao;
 import java.util.List;
@@ -36,6 +37,13 @@ public class DisciplinaDaoImpl implements DisciplinaDao {
     public List<Disciplina> listarTodos() {
         return em.createQuery("SELECT d FROM Disciplina d", Disciplina.class).
                 getResultList();
+    }
+    
+    @Override
+    public List<Disciplina> listarTodos(Curso curso) {
+        return em.createQuery("SELECT d FROM Disciplina d WHERE D.curso =:curso", Disciplina.class)
+                .setParameter("curso", curso)
+                .getResultList();
     }
 
     @Override

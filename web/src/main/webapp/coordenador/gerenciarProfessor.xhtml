@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>CRUD - PROFESSOR</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script src="../bootstrap/js/jquery-3.2.1.min.js"/>
+        <script src="../bootstrap/js/bootstrap.js"/>
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.css"/>
+        <link rel="stylesheet" href="../css/style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <h:commandLink action="../principal.xhtml" class="btn btn-warning" value="Voltar"/>
+            </div>
+            
+            <br />
+            
+            <div class="row text-center">
+                <h3>Gerenciador de Professores</h3>
+                <hr />
+            </div>
+            
+            <div class="row text-center">
+                <h:form>
+                    <div class="form-group">
+                        <h:outputLabel class="text-left col-md-12" value="Nome: " for="prof">
+                            <h:inputText id="prof"
+                                         value="#{controladorCRUDProf.professor.nome}"
+                                         maxlength="40"
+                                         class="form-control col-md-12"
+                                         required="true"
+                                         requiredMessage="Informe um nome para o professor"/>
+                        </h:outputLabel>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h:outputLabel class="text-left col-md-12" value="Email: " for="email">
+                            <h:inputText id="email"
+                                         value="#{controladorCRUDProf.professor.email}"
+                                         maxlength="40"
+                                         class="form-control col-md-12"
+                                         required="true"
+                                         requiredMessage="Informe um email para o professor">
+                                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                            </h:inputText>
+                        </h:outputLabel>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h:outputLabel class="text-left col-md-12" value="Senha: " for="senha">
+                            <h:inputText id="senha"
+                                         class="form-control col-md-12"
+                                         value="#{controladorCRUDProf.professor.senha}"
+                                         maxlength="15"
+                                         required="true"
+                                         requiredMessage="Informe uma senha para o professor"/>
+                        </h:outputLabel>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h:outputLabel class="text-left col-md-12" for="regime" value="Regime: ">
+                            <h:selectOneMenu class="form-control" id="regime" value = "#{controladorCRUDProf.valorRegime}">
+                                <f:selectItems value="#{controladorCRUDProf.regime}" 
+                                               var="regime"
+                                               itemLabel="#{reg}"
+                                               itemValue="#{reg}"/>
+                            </h:selectOneMenu>
+                        </h:outputLabel>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h:outputLabel class="text-left col-md-12" for="unidade" value="Unidade: ">
+                            <h:selectOneMenu class="form-control" id="unidade" value = "#{controladorCRUDProf.valorUnidade}">
+                                <f:selectItems value="#{controladorCRUDProf.unidade}" 
+                                               var="unidade"
+                                               itemLabel="#{uni}"
+                                               itemValue="#{uni}"/>
+                            </h:selectOneMenu>
+                        </h:outputLabel>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h:outputLabel class="text-left col-md-12" for="vinculo" value="Vinculo: ">
+                            <h:selectOneMenu id="vinculo"
+                                             class="form-control"
+                                             value = "#{controladorCRUDProf.valorVinculo}">
+                                <f:selectItems value="#{controladorCRUDProf.vinculo}" 
+                                               var="vin"
+                                               itemLabel="#{vin}"
+                                               itemValue="#{vin}"/>
+                            </h:selectOneMenu>
+                        </h:outputLabel>
+                    </div>
+                    
+                    <br />
+                    
+                    <h:commandButton value="Adicionar"
+                                     rendered="#{controladorCRUDProf.editando eq false}"
+                                     class="btn btn-success col-md-12"
+                                     action="#{controladorCRUDProf.cadastrarProfessor()}"/>
+                    <h:commandButton value="Atualizar"
+                                     class="btn btn-primary col-md-12"
+                                     rendered="#{controladorCRUDProf.editando}"
+                                     action="#{controladorCRUDProf.atualizarProfessor()}"/>
+                    <br></br>
+                </h:form>
+            </div>
+            
+            <br />
+            
+            <div class="row">
+                <h:form>
+                    <h3 style="text-align: center;">Lista de Professores</h3>
+                    <h:dataTable class="table table-hover"
+                                 value="#{controladorCoordenador.professores()}"
+                                 var="p">
+                        <h:column>
+                            <f:facet name="header">Nome</f:facet>
+                            <h:outputText value="#{p.nome}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Email</f:facet>
+                            <h:outputText value="#{p.email}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Regime</f:facet>
+                            <h:outputText value="#{p.regime}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Vinculo</f:facet>
+                            <h:outputText value="#{p.vinculo}"/>
+                        </h:column>                       
+                        <h:column>
+                            <f:facet name="header">Editar</f:facet>
+                            <h:commandButton value="Editar" 
+                                             immediate="true"
+                                             class="btn btn-primary"
+                                             action="#{controladorCRUDProf.editarProfessor(p)}"/>
+                        </h:column> 
+                    </h:dataTable>
+                </h:form>
+            </div>
+            
+        </div>
+    </body>
+</html>

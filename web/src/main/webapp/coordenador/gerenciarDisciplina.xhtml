@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>CRUD - DISCIPLINA</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script src="../bootstrap/js/jquery-3.2.1.min.js"/>
+        <script src="../bootstrap/js/bootstrap.js"/>
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.css"/>
+        <link rel="stylesheet" href="../css/style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <h:commandLink action="../principal.xhtml" class="btn btn-warning" value="Voltar"/>
+            </div>
+            
+            <br />
+            
+            <div class="row text-center">
+                <h3>Gerenciador de Disciplinas</h3>
+            </div>
+            
+            
+            <div class="row text-center">
+                <h:form>
+                    <div class="form-group">
+                        <h:outputLabel value="Descricao: " class="text-left col-md-12" for="descricao"
+                            <h:inputText id="descricao"
+                                         value="#{controladorCoordenador.disciplina.descricao}"
+                                         required="true"
+                                         class="form-control col-md-12"
+                                         maxlength="40"
+                                         requiredMessage="Informe uma descricao para a disciplina"/>
+                        </h:outputLabel>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h:outputLabel value="Abreviacao " class="text-left col-md-12" for="abrev">
+                            <h:inputText id="abrev"
+                                         value="#{controladorCoordenador.disciplina.abreviacao}"
+                                         required="true"
+                                         class="form-control col-md-12"
+                                         maxlength="15"
+                                         requiredMessage="Informe uma abreviação para a disciplina"/>
+                        </h:outputLabel>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h:outputLabel value="Aulas Semanais: " class="text-left col-md-12" for="as">
+                            <h:inputText id="as"
+                                         value="#{controladorCoordenador.disciplina.aulas_semana}"
+                                         required="true"
+                                         class="form-control col-md-12"
+                                         requiredMessage="Informe o numero total de aulas para a disciplina"/>
+                        </h:outputLabel>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h:outputLabel value="Carga Horaria: " class="text-left col-md-12" for="ch">
+                            <h:inputText id="ch"
+                                         value="#{controladorCoordenador.disciplina.carga_horaria}"
+                                         class="form-control col-md-12"
+                                         required="true"
+                                         requiredMessage="Informe o numero a carga horaria da disciplina"/>
+                        </h:outputLabel>
+                    </div>
+                    <div class="form-group">
+                        <h:inputHidden 
+                            value="#{controladorCoordenador.disciplina.curso = controladorCoordenador.curso}"/>
+                    </div>
+                   
+                    <br></br>
+                    <h:commandButton value="Adicionar"
+                                     action="#{controladorCRUDDisc.cadastrar()}"
+                                     class="btn btn-success col-md-12"/>
+                    <h:commandButton value="Atualizar"
+                                     class="btn btn-primary col-md-12"
+                                     action="#{controladorCoordenador.atualizardisciplina()}"/>
+                    <br></br>
+                </h:form>
+            </div>
+            
+            <br /> 
+            
+            <div class="row">
+                <h:form>
+                    <h3 style="text-align: center;">Lista de Disciplinas</h3>
+                    <h:dataTable value="#{controladorCoordenador.disciplinas()}"
+                                 var="d"
+                                 class="table table-hover">
+                        <h:column>
+                            <f:facet name="header">Descricao</f:facet>
+                            <h:outputText value="#{d.descricao}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Abreviacao</f:facet>
+                            <h:outputText value="#{d.abreviacao}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Aulas</f:facet>
+                            <h:outputText value="#{d.aulas_semana}"/>
+                        </h:column>     
+                        <h:column>
+                            <f:facet name="header">Carga Horaria</f:facet>
+                            <h:outputText value="#{d.carga_horaria}"/>
+                        </h:column>  
+                        <h:column>
+                            <f:facet name="header">Curso</f:facet>
+                            <h:outputText value="#{d.curso.info.abreviacao}"/>
+                        </h:column>  
+                        <h:column>
+                            <f:facet name="header">Editar</f:facet>
+                            <h:commandButton value="Editar" 
+                                             immediate="true"
+                                             class="btn btn-primary"
+                                             action="#{controladorCoordenador.disciplina = d}"/>
+                        </h:column> 
+                        <h:column>
+                            <f:facet name="header">Excluir</f:facet>
+                            <h:commandButton value="Excluir" 
+                                             immediate="true"
+                                             class="btn btn-danger"
+                                             action="#{controladorCRUDDisc.remover(d)}"/>
+                        </h:column> 
+                    </h:dataTable>
+                </h:form>
+            </div>
+            
+        </div>
+    </body>
+</html>
