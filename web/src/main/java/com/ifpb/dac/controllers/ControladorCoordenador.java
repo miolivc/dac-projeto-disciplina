@@ -58,7 +58,7 @@ public class ControladorCoordenador {
     
     public String atualizarInfoCurso() {
         cursoDao.atualizar(curso);
-        return "principal.xhtml";
+        return null;
     }
     
     public String atualizardisciplina() {
@@ -93,28 +93,7 @@ public class ControladorCoordenador {
     }
     
     public List<Pedido> pedidos() {
-        List<Pedido> pedidos = new ArrayList<>();
-        
-        for (Pedido pedido : pedidoDao.listarTodos()) {
-            if (pedido.getTipoUsuario() == TipoUsuario.Aluno
-                    && alunoDao.buscarPorId(pedido.getId())
-                            .getCurso().getCodigo_curso() == curso.getCodigo_curso()) {
-                pedidos.add(pedido);
-                continue;
-            } 
-            
-            if (pedido.getTipoUsuario() == TipoUsuario.Professor) {
-                List<Turma> t = professorDao.buscarPorId(pedido.getId()).getTurmas();
-                for (Turma tur : curso.getTurmas()) {
-                    if (t.contains(tur)) {
-                        pedidos.add(pedido);
-                        break;
-                    }
-                }
-            }
-        }
-        return pedidos;
-//        return pedidoDao.listarPedidosPorCurso(curso);
+        return pedidoDao.listarPedidosPorCurso(curso);
     }
     
     public List<Professor> professores() {
