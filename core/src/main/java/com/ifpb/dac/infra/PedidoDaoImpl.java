@@ -85,11 +85,8 @@ public class PedidoDaoImpl implements PedidoDao {
                 .setParameter("curso", curso)
                 .getResultList();
         
-        sql = "SELECT p FROM Pedido p, Professor a WHERE a.email = p.email AND a = ANY "
-                + "(SELECT j FROM Professor j WHERE j MEMBER OF ANY :turmas.professor)";
-        List<Pedido> profs = em.createQuery(sql, Pedido.class)
-                .setParameter("turmas", curso.getTurmas())
-                .getResultList();
+        sql = "SELECT p FROM Pedido p, Professor a WHERE a.email = p.email";
+        List<Pedido> profs = em.createQuery(sql, Pedido.class).getResultList();
         
         alunos.addAll(profs);
         return alunos;
