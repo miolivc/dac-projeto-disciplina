@@ -120,8 +120,10 @@ public class ControladorCadastro implements Serializable {
             } else {
                 Aluno aln = new Aluno(nome, email, senha, curso, false);
                 Pedido p = new Pedido(nome, email, senha, TipoUsuario.Aluno, 1);
+                Usuario usuario = new Usuario(nome, email, senha, TipoUsuario.Aluno, false);
                 pedidoDao.adicionar(p);
                 alunoDao.adicionar(aln);
+                usuarioDao.adicionar(usuario);
                 redirecionar();
             }
         }
@@ -139,10 +141,13 @@ public class ControladorCadastro implements Serializable {
         } else {
             Usuario usuario = new Usuario(professor.getNome(), professor.getEmail(), 
                     professor.getSenha(), TipoUsuario.Professor, false);
+            
             Pedido p = new Pedido(professor.getNome(), professor.getEmail(), 
                     professor.getSenha(), TipoUsuario.Professor, 1);
+            
             pedidoDao.adicionar(p);
             usuarioDao.adicionar(usuario);
+            
             professorDao.adicionar(professor);
             limparCampos();
             redirecionar();
