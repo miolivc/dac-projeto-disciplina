@@ -3,6 +3,7 @@ package com.ifpb.dac.interfaces;
 
 import com.ifpb.dac.entidades.PerfilProfessor;
 import com.ifpb.dac.entidades.Professor;
+import com.ifpb.dac.enums.Unidade;
 import java.util.List;
 
 public interface ProfessorDao {
@@ -17,4 +18,5 @@ public interface ProfessorDao {
     Professor autentica(String email, String senha);
     boolean verificarEmail(String email);
     List<PerfilProfessor> todosOsPerfisProfessores();
+    List<Professor> listarTodos(Unidade unidade);
 }

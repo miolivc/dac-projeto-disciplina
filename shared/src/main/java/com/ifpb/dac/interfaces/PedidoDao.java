@@ -18,7 +18,6 @@ public interface PedidoDao {
     Pedido buscarPorId(int id);
     Pedido buscarPorCredenciais(String email, String senha);
     List<Pedido> listarPedidosPorTipoUsuario(TipoUsuario tipo);
-    List<Pedido> listarPedidosAlunosPorCurso(Curso curso);
     List<Pedido> listarPedidosPorCurso(Curso curso);
     
 }

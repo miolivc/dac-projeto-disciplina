@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <h:form>
-                    <h:commandLink action="../principal.xhtml" class="btn btn-warning" value="Voltar"/>
+                    <h:commandLink action="principal.xhtml" class="btn btn-warning" value="Voltar"/>
                 </h:form>
             </div>
             
@@ -75,14 +75,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <h:outputLabel class="text-left col-md-12" for="unidade" value="Unidade: ">
-                            <h:selectOneMenu class="form-control" id="unidade" value = "#{controladorCRUDProf.valorUnidade}">
-                                <f:selectItems value="#{controladorCRUDProf.unidade}" 
-                                               var="unidade"
-                                               itemLabel="#{uni}"
-                                               itemValue="#{uni}"/>
-                            </h:selectOneMenu>
-                        </h:outputLabel>
+                        <h:inputHidden value="#{controladorCRUDProf.professor.unidade = controladorCoordenador.coordenador.unidade}"/>
                     </div>
                     
                     <div class="form-group">

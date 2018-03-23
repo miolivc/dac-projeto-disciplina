@@ -97,7 +97,7 @@ public class ControladorCoordenador {
     }
     
     public List<Professor> professores() {
-        return professorDao.listarTodos();
+        return professorDao.listarTodos(coordenador.getUnidade());
     }
     
     public List<Turma> turmas() {

@@ -1,7 +1,6 @@
 package com.ifpb.dac.infra;
 
 import com.ifpb.dac.entidades.Curso;
-import com.ifpb.dac.entidades.Professor;
 import com.ifpb.dac.entidades.Turma;
 import com.ifpb.dac.interfaces.TurmaDao;
 import java.util.ArrayList;
@@ -116,6 +115,7 @@ public class TurmaDaoImpl implements TurmaDao {
     @Override
     public List<Turma> listarTodos(Curso curso) {
         return em.createQuery("SELECT t FROM Turma t WHERE t.curso = :curso", Turma.class)
+                    .setParameter("curso", curso)
                     .getResultList();
     }
     
