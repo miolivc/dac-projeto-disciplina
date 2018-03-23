@@ -9,6 +9,7 @@ import com.ifpb.dac.entidades.Pedido;
 import com.ifpb.dac.entidades.Professor;
 import com.ifpb.dac.entidades.Turma;
 import com.ifpb.dac.enums.TipoUsuario;
+import com.ifpb.dac.enums.Unidade;
 import com.ifpb.dac.interfaces.AlunoDao;
 import com.ifpb.dac.interfaces.CursoDao;
 import com.ifpb.dac.interfaces.DisciplinaDao;
@@ -97,7 +98,8 @@ public class ControladorCoordenador {
     }
     
     public List<Professor> professores() {
-        return professorDao.listarTodos(curso.getUnidade());
+        String unidade = nomeUnidade(coordenador.getUnidade());
+        return professorDao.listarTodos();
     }
     
     public List<Turma> turmas() {
@@ -128,4 +130,10 @@ public class ControladorCoordenador {
         this.disciplina = disciplina;
     }
      
+    private String nomeUnidade(Unidade unidade) {
+//        if (unidade == Unidade.UNINFO) {
+//            return "Unidade de Informática";
+//        }
+        return "Unidade de Informática";
+    }
 }

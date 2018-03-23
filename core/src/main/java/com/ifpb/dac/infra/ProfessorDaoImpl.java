@@ -43,7 +43,7 @@ public class ProfessorDaoImpl implements ProfessorDao {
     }
     
     @Override
-    public List<Professor> listarTodos(Unidade unidade) {
+    public List<Professor> listarTodos(String unidade) {
         return em.createQuery("SELECT p FROM Professor p WHERE p.unidade =:unidade",Professor.class)
                 .setParameter("unidade", unidade)
                 .getResultList();

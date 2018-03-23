@@ -18,5 +18,5 @@ public interface ProfessorDao {
     Professor autentica(String email, String senha);
     boolean verificarEmail(String email);
     List<PerfilProfessor> todosOsPerfisProfessores();
-    List<Professor> listarTodos(Unidade unidade);
+    List<Professor> listarTodos(String unidade);
 }
