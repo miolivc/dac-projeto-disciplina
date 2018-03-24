@@ -42,7 +42,7 @@
                     
                     <div class="form-group">
                         <h:outputLabel for="disc" class="text-left col-md-12" value="Disciplina: ">
-                            <h:selectOneMenu id="disc" class="form-control" value = "#{controladorCRUDTurma.valorDisc}">
+                            <h:selectOneMenu id="disc" class="form-control" value = "#{controladorCRUDTurma.turma.nome_disciplina}">
                                 <f:selectItems value="#{controladorCRUDTurma.discs}" 
                                                var="dis"
                                                itemLabel="#{dis}"
@@ -52,7 +52,8 @@
                     </div>
                     
                     <div class="form-group">
-                        <h:outputLabel for="curso" class="text-left col-md-12" value="Curso: ">
+                        <h:outputLabel for="curso" class="text-left col-md-12" value="Curso: "
+                                       rendered="#{controladorCRUDTurma.editando eq false}">
                             <h:selectOneMenu id="curso" class="form-control"
                                              rendered="#{controladorCRUDTurma.editando eq false}"
                                              value = "#{controladorCRUDTurma.valorCurso}">
