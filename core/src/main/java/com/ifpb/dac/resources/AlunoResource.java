@@ -41,7 +41,7 @@ public class AlunoResource {
         }
         
         String authorization = BasicAuth.encode(email, password);
-        String answer = "{'Authorization': " + authorization + "}";
+        String answer = "{'Token': " + authorization + "}";
         
         return Response.ok()
                 .entity(answer)
