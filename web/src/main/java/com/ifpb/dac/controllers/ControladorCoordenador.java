@@ -52,7 +52,8 @@ public class ControladorCoordenador {
         session = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext()
                 .getSession(false);
-        
+        this.coordenador = (Coordenador) session.getAttribute("coordenador");
+        this.curso = coordenador.getCurso();
     }
     
     public String atualizarInfoCurso(){
