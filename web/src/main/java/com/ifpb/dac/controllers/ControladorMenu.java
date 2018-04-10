@@ -1,5 +1,6 @@
 package com.ifpb.dac.controllers;
 
+import com.ifpb.dac.entidades.Coordenador;
 import java.io.IOException;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -18,6 +19,7 @@ public class ControladorMenu {
 
     private String credenciais;
     private HttpSession sessao;
+//    private Coordenador coordenador;
 
     @PostConstruct
     public void init() {
@@ -32,7 +34,15 @@ public class ControladorMenu {
     public void setCredenciais(String credenciais) {
         this.credenciais = credenciais;
     }
-
+//
+//    public Coordenador getCoordenador() {
+//        return (Coordenador) sessao.getAttribute("coordenador");
+//    }
+//
+//    public void setCoordenador(Coordenador coordenador) {
+//        this.coordenador = coordenador;
+//    }
+//    
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "index.xhtml";

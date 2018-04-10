@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Pagina Inicial</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -14,10 +13,10 @@
     <h:body>
         <div class="container-fluid">
             <div class="row text-center">
+                <h2>Bem vindo, <h:outputText value="#{controladorCoordenador.coordenador.nome}"/></h2>
                 <h1>Menu</h1>
                 <hr />
             </div>
-
             <div class="row">
                 <div class="col-md-12">
                     <h:link outcome="publico/sala.xhtml" 
@@ -84,32 +83,32 @@
                             class="item-menu col-sm-12 col-md-3"
                             rendered="#{controladorMenu.credenciais eq 'prof' or 'coord'}"
                             value="Responder Dúvidas" />
-                    
+
                     <h:link outcome="coordenador/gerenciar.xhtml"
                             class="item-menu col-sm-12 col-md-3"
                             rendered="#{controladorMenu.credenciais eq 'coord'}"
                             value="Gerenciar Pedidos de Acesso"/>
-                    
+
                     <h:link outcome="coordenador/gerenciarCurso.xhtml"
                             class="item-menu col-sm-12 col-md-3"
                             rendered="#{controladorMenu.credenciais eq 'coord'}"
                             value="Gerenciar Curso"/>
-                    
+
                     <h:link outcome="coordenador/gerenciarDisciplina.xhtml"
                             class="item-menu col-sm-12 col-md-3"
                             rendered="#{controladorMenu.credenciais eq 'coord'}"
                             value="Gerenciar Disciplinas"/>
-                    
+
                     <h:link outcome="coordenador/gerenciarTurma.xhtml"
                             class="item-menu col-sm-12 col-md-3"
                             rendered="#{controladorMenu.credenciais eq 'coord'}"
                             value="Gerenciar Turmas"/>
-                    
+
                     <h:link outcome="coordenador/gerenciarProfessor.xhtml"
                             class="item-menu col-sm-12 col-md-3"
                             rendered="#{controladorMenu.credenciais eq 'coord'}"
                             value="Gerenciar Professor"/>
-                    
+
 
                 </div> <!-- .col-md-12 -->    
             </div> <!-- .row -->

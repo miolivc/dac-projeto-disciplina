@@ -37,7 +37,7 @@ public class Coordenador implements Serializable {
     @Enumerated(EnumType.STRING)
     private Vinculo vinculo;
     
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private Curso curso;
 
     private boolean logado;

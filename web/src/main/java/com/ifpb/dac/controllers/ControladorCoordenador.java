@@ -52,12 +52,10 @@ public class ControladorCoordenador {
         session = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext()
                 .getSession(false);
-        coordenador = (Coordenador) session.getAttribute("coordenador");
-        curso = coordenador.getCurso();
         
     }
     
-    public String atualizarInfoCurso() {
+    public String atualizarInfoCurso(){
         cursoDao.atualizar(curso);
         return null;
     }
@@ -99,19 +97,6 @@ public class ControladorCoordenador {
         if (pedidos == null) {
             return Collections.EMPTY_LIST;
         }
-//        for (Pedido pedido : pedidos) {
-//            if (pedido.getTipoUsuario().equals(TipoUsuario.Professor)) {
-//                Professor p = professorDao.buscarPorNome(pedido.getNome());
-//                for (Turma t: curso.getTurmas()) {
-//                    if (t.getProfessor() == p) {
-//                        answer.add(pedido);
-//                        break;
-//                    }
-//                }
-//            } else {
-//                answer.add(pedido);
-//            }
-//        }
         return pedidos;
     }
     
@@ -124,6 +109,8 @@ public class ControladorCoordenador {
     }
     
     public Curso getCurso() {
+        this.coordenador = (Coordenador) session.getAttribute("coordenador");
+        this.curso = coordenador.getCurso();
         return curso;
     }
 
@@ -132,7 +119,7 @@ public class ControladorCoordenador {
     }
 
     public Coordenador getCoordenador() {
-        return coordenador;
+        return (Coordenador) session.getAttribute("coordenador");
     }
 
     public void setCoordenador(Coordenador coordenador) {
