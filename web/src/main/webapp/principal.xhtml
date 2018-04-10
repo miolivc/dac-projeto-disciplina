@@ -13,7 +13,10 @@
     <h:body>
         <div class="container-fluid">
             <div class="row text-center">
-                <h2>Bem vindo, <h:outputText value="#{controladorCoordenador.coordenador.nome}"/></h2>
+                <h2>
+                    <h:outputText rendered="#{controladorMenu.credenciais eq 'coord'}" 
+                                  value="Bem vindo, #{controladorCoordenador.coordenador.nome}" />
+                </h2>
                 <h1>Menu</h1>
                 <hr />
             </div>
