@@ -16,7 +16,7 @@
             <div class="row">
                 <h:form>
                     <h:commandLink action="#{controladorMenu.voltar()}" 
-                                   class="btn btn-warning col-md-4" value="Voltar"/>
+                                   class="btn btn-warning col-md-2" value="Voltar"/>
                 </h:form>
             </div>
             
@@ -42,10 +42,9 @@
                     
                     
                     <div class="form-group">
-                        <h:outputLabel for="disc" class="text-left col-md-12" value="Disciplina: "
-                                       rendered="#{controladorCRUDTurma.editando eq false}">
+                        <h:outputLabel for="disc" class="text-left col-md-12" value="Disciplina: ">
                             <h:selectOneMenu id="disc" class="form-control" 
-                                             value = "#{controladorCRUDTurma.turma.nome_disciplina}">
+                                             value = "#{controladorCRUDTurma.valorDisc}">
                                 <f:selectItems value="#{controladorCRUDTurma.discs}" 
                                                var="dis"
                                                itemLabel="#{dis}"
@@ -87,7 +86,7 @@
                                      class="btn btn-success col-md-12"/>
                     <h:commandButton value="Atualizar"
                                      rendered="#{controladorCRUDTurma.editando}"
-                                     action="#{controladorCRUDTurma.atualizar()}"
+                                     action="#{controladorCRUDTurma.atualizarEspecifico()}"
                                      class="btn btn-warning col-md-12"/>
                     <br></br>
                 </h:form>

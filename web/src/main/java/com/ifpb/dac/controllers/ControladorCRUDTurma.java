@@ -149,6 +149,20 @@ public class ControladorCRUDTurma implements Serializable {
         return null;
     }
     
+    /**
+     * Refere-se a atualização de uma turma que não pode trocar de curso,
+     * já que o usuário (Coordenador), não tem esse tipo de permissão
+     * @return link da própria página que chamou o método
+     */
+    public String atualizarEspecifico(){
+        turma.setNome_disciplina(valorDisc);
+        turma.setProfessor(profDao.buscarPorNome(valorProf));
+        turmaDao.atualizar(turma);
+        turma = new Turma();
+        editando = false;
+        return null;
+    }
+    
     public String remover(Turma t){
         turmaDao.remover(t);
         return null;

@@ -12,7 +12,8 @@ CREATE TABLE disciplina (
 	carga_horaria int not null,
 	descricao varchar(50) not null,
 	codigo_curso int,
-	FOREIGN KEY (codigo_curso) REFERENCES curso(codigo_curso) ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY (codigo_curso) REFERENCES curso(codigo_curso) 
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE laboratorio(
 	codigo_lab int primary key,

@@ -72,10 +72,8 @@
                     
                     <div class="form-group">
                         <h:outputLabel rendered="#{controladorCRUDDisc.editando eq false}"
-                                       class="text-left col-md-12"
-                                       for="curso" value="Curso: ">
+                                       class="text-left col-md-12" for="curso" value="Curso: ">
                             <h:selectOneMenu class="form-control" id="curso" 
-                                             readonly="true"
                                              value = "#{controladorCRUDDisc.valorSelect}">
                                 <f:selectItems value="#{controladorCRUDDisc.cursos}" 
                                                var="crs"

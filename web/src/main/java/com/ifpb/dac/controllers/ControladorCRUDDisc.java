@@ -82,6 +82,14 @@ public class ControladorCRUDDisc implements Serializable {
     }
     
     public String atualizar(){
+        disciplina.setCurso(cursoDao.retornarPorNome(valorSelect));
+        discDao.atualizar(disciplina);
+        disciplina = new Disciplina();
+        editando = false;
+        return null;
+    }
+    
+    public String atualizarDiscCurso() {
         discDao.atualizar(disciplina);
         disciplina = new Disciplina();
         editando = false;
