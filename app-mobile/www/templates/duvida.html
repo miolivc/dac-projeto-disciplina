@@ -1,14 +1,18 @@
-<ion-view view-title="Duvida">
-  <ion-content>
-    <div class="spacer" style="width: 300px; height: 31px;"></div>
-  	<h3 align="center">Duvida</h3>
-  	<div class="spacer" style="width: 300px; height: 31px;"></div>
-    <form id="mensagem" class="list">
-      <label class="item item-input" id="votar-textarea1" >
-        <textarea placeholder="Digite sua duvida"></textarea>
-      </label>
-    </form>
-    <div class="spacer" style="width: 300px; height: 31px;"></div>
-    <button id="votar-button2" class="button button-balanced button-block">Enviar</button>
+<ion-view view-title="Dúvida">
+ <ion-content>
+    <ion-list>
+      <ion-item href="#/app/enviarDuvida">
+        Enviar dúvidas
+      </ion-item>
+      <ion-item href="#/app/todasDuvidas"> 
+        Ver todas as dúvidas
+      </ion-item>
+      <ion-item href="#/app/duvidasRespondidas">
+        Ver dúvidas respondidas
+      </ion-item>
+      <ion-item href="#/app/duvidasAberto">
+        Dúvidas em aberto
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

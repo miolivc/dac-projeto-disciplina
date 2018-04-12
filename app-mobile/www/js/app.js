@@ -35,14 +35,54 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
-  .state('app.mensagem', {
-    url: '/mensagem',
+  //enviar duvidas
+  .state('app.enviarDuvida', {
+    url: '/enviarDuvida',
     views: {
       'menuContent': {
-        templateUrl: 'templates/mensagem.html'
+        templateUrl: 'templates/enviarDuvida.html'
       }
     }
   })
+
+//todas as duvidas
+.state('app.todasDuvidas', {
+  url: '/todasDuvidas',
+  views: {
+    'menuContent': {
+      templateUrl: 'templates/todasDuvidas.html'
+    }
+  }
+})
+
+//duvidas respondidas
+.state('app.duvidasRespondidas', {
+  url: '/duvidasRespondidas',
+  views: {
+    'menuContent': {
+      templateUrl: 'templates/duvidasRespondidas.html'
+    }
+  }
+})
+
+//duvidas em aberto
+.state('app.duvidasAberto', {
+  url: '/duvidasAberto',
+  views: {
+    'menuContent': {
+      templateUrl: 'templates/duvidasAberto.html'
+    }
+  }
+})
+
+.state('app.mensagem', {
+  url: '/mensagem',
+  views: {
+    'menuContent': {
+      templateUrl: 'templates/mensagem.html'
+    }
+  }
+})
 
   //login
   .state('login', {
@@ -85,15 +125,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
 
 //horarios das salas
-  .state('app.horariosSalas', {
-    url: '/horariosSalas',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/horariosSalas.html',
-        controller: 'horarioSalasCtrl'
-      }
+.state('app.horariosSalas', {
+  url: '/horariosSalas',
+  views: {
+    'menuContent': {
+      templateUrl: 'templates/horariosSalas.html',
+      controller: 'horarioSalasCtrl'
     }
-  })
+  }
+})
 
   //horarios dos lab
   .state('app.horariosLabs', {
