@@ -16,5 +16,6 @@ public interface AlunoDao {
     Aluno buscarPorId(int id);
     Aluno autentica(String email, String senha);
     boolean verificarEmail(String email);
-            
+    Aluno buscarPorEmail(String email_aluno);
+    
 }

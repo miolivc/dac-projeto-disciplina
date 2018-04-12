@@ -12,6 +12,8 @@ import javax.ejb.Stateless;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Stateless
@@ -25,6 +27,7 @@ public class AlunoResource {
     
     @POST
     @Path("authenticate")
+    @Produces({MediaType.APPLICATION_JSON})
     public Response authenticate(@FormParam("email") String email, 
             @FormParam("password") String password) throws UnsupportedEncodingException {
         
@@ -41,7 +44,7 @@ public class AlunoResource {
         }
         
         String authorization = BasicAuth.encode(email, password);
-        String answer = "{'Token': " + authorization + "}";
+        String answer = "{'Token': '" + authorization + "'}";
         
         return Response.ok()
                 .entity(answer)

@@ -17,7 +17,7 @@ import javax.persistence.TypedQuery;
 @Stateless
 @Remote(AlunoDao.class)
 public class AlunoDaoImpl implements AlunoDao {
-    
+
     @PersistenceContext
     private EntityManager em;
 
@@ -54,14 +54,28 @@ public class AlunoDaoImpl implements AlunoDao {
         query.setParameter("email", email.toLowerCase());
         query.setParameter("senha", senha);
         Optional<Aluno> resultado = query.getResultList().stream().findFirst();
-        if(resultado.isPresent()){
+        if (resultado.isPresent()) {
             Aluno usuario = resultado.get();
             return usuario;
         } else {
             return null;
         }
     }
-    
+
+    @Override
+    public Aluno buscarPorEmail(String email_aluno) {
+        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE "
+                + "a.email =:email", Aluno.class);
+        query.setParameter("email", email_aluno.toLowerCase());
+        Optional<Aluno> resultado = query.getResultList().stream().findFirst();
+        if (resultado.isPresent()) {
+            Aluno usuario = resultado.get();
+            return usuario;
+        } else {
+            return null;
+        }
+    }
+
     @Override
     public boolean verificarEmail(String email) {
         TypedQuery<Aluno> createQuery = em.createQuery("SELECT a FROM "
@@ -70,5 +84,5 @@ public class AlunoDaoImpl implements AlunoDao {
         Optional<Aluno> findFirst = createQuery.getResultList().stream().findFirst();
         return findFirst.isPresent();
     }
-    
+
 }

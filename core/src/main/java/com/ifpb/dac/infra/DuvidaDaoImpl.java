@@ -5,10 +5,12 @@
  */
 package com.ifpb.dac.infra;
 
+import com.ifpb.dac.entidades.Aluno;
 import com.ifpb.dac.entidades.Duvida;
 import com.ifpb.dac.entidades.Professor;
 import com.ifpb.dac.interfaces.DuvidaDao;
 import java.util.List;
+import java.util.Optional;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,7 +27,7 @@ public class DuvidaDaoImpl implements DuvidaDao {
 
     @PersistenceContext
     private EntityManager em;
-    
+
     @Override
     public void adicionar(Duvida duvida) {
         em.persist(duvida);
@@ -35,7 +37,7 @@ public class DuvidaDaoImpl implements DuvidaDao {
     public void remover(Duvida duvida) {
         em.remove(duvida);
     }
-    
+
     @Override
     public void atualizar(Duvida duvida) {
         Duvida d = em.find(Duvida.class, duvida.getId());
@@ -65,8 +67,8 @@ public class DuvidaDaoImpl implements DuvidaDao {
         System.out.println("Codigo professor: " + codigoProfessor);
         TypedQuery<Duvida> createQuery = em.createQuery("select d from Duvida d where d.resposta is null and d.professor.codigo = :codigo_professor", Duvida.class);
         createQuery.setParameter("codigo_professor", codigoProfessor);
-        
+
         return createQuery.getResultList();
     }
-    
+
 }
